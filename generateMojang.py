@@ -201,6 +201,8 @@ def process_single_variant(lwjgl_variant: MetaVersion):
         # this is a dependency that Mojang kept in, but doesn't belong there anymore
         filtered_libraries = list(filter(lambda l: l.name.artifact not in ["jutils", "jinput"], v.libraries))
         v.libraries = filtered_libraries
+
+
     else:
         raise Exception("LWJGL version not recognized: %s" % v.version)
 
@@ -223,6 +225,51 @@ def process_single_variant(lwjgl_variant: MetaVersion):
                           lib.downloads.classifiers.keys())
                     good = False
                     break
+
+    # check for janky mojang m1 libraries and format them properly
+    for lib in v.libraries:
+        if not lib.downloads.classifiers:
+            continue
+
+        for cl in lib.downloads.classifiers:
+            if cl == "natives-macos-arm64":
+                print("Library has arm64 mac native:", lib.name)
+                if not lib.rules:
+                    lib.rules = [
+                        {
+                            "action": "allow"
+                        },
+                        {
+                            "action": "disallow",
+                            "os": {
+                                "name": "osx-arm64"
+                            }
+                        }
+                    ]
+                new_lib = copy.deepcopy(lib)
+                new_lib.natives = {
+                    "macos": "natives-macos"
+                }
+                new_classifiers = {}
+
+                for name, val in lib.downloads.classifiers.items():
+                    if name == "natives-macos-arm64":
+                        new_classifiers = {"natives-macos": val}
+                        break
+
+                new_lib.downloads.classifiers = new_classifiers;
+                new_lib.rules = [{
+                    "action": "allow",
+                    "os": {
+                        "name": "osx-arm64",
+
+                    }
+                }]
+                v.libraries.append(new_lib)
+
+
+
+
     if good:
         v.write(filename)
     else:
