@@ -4,13 +4,15 @@ import os
 from collections import defaultdict, namedtuple
 from operator import attrgetter
 from pprint import pprint
-from typing import Optional
+import re
+from typing import Dict, List, Optional
+from libPatches import get_lib_patches
 
 from meta.common import ensure_component_dir, polymc_path, upstream_path, static_path
 from meta.common.mojang import VERSION_MANIFEST_FILE, MINECRAFT_COMPONENT, LWJGL3_COMPONENT, LWJGL_COMPONENT, \
     STATIC_OVERRIDES_FILE, VERSIONS_DIR
 from meta.model import MetaVersion, Library, GradleSpecifier, MojangLibraryDownloads, MojangArtifact, Dependency, \
-    MetaPackage, MojangRules
+    MetaPackage, MojangRule, MojangRules, OSRule
 from meta.model.mojang import MojangIndexWrap, MojangIndex, MojangVersion, LegacyOverrideIndex
 
 PMC_DIR = polymc_path()
@@ -56,10 +58,12 @@ LOG4J_HASHES = {
 }
 
 
-def add_or_get_bucket(buckets, rules: Optional[MojangRules]) -> MetaVersion:
+def add_or_get_bucket(buckets, lib: Library) -> MetaVersion:
     rule_hash = None
-    if rules:
-        rule_hash = hash(rules.json())
+    # if there are custom rules used to exclude arch-specific patches, use a key of "None"
+    # to continue treating the library as common between all LWJGL versions
+    if lib.rules and not lib.arch_rules:
+            rule_hash = hash(lib.rules.json())
 
     if rule_hash in buckets:
         bucket = buckets[rule_hash]
@@ -184,7 +188,7 @@ def process_single_variant(lwjgl_variant: MetaVersion):
     v.order = -1
     good = True
     for lib in v.libraries:
-        if not lib.natives:
+        if not lib.natives or lib.arch_rules:
             continue
         checked_dict = {'linux', 'windows', 'osx'}
         if not checked_dict.issubset(lib.natives.keys()):
@@ -206,11 +210,32 @@ def process_single_variant(lwjgl_variant: MetaVersion):
         return False
 
 
+# converts a full library name to a major version name
+# for example, "ca.weblite:java-objc-bridge:1.1.0" becomes "ca.weblite:java-objc-bridge:1"
+def get_major_name(name: str):
+    return re.match(r'.+:\d+', name).group(0)
+
+
+def add_or_append_arch_rule(lib: Library, action: str, arch: str):
+    if lib.arch_rules:
+        lib.arch_rules[action].append(arch)
+    else:
+        lib.arch_rules = {action: [arch]}
+
+
 def main():
     # get the local version list
     override_index = LegacyOverrideIndex.parse_file(os.path.join(STATIC_DIR, STATIC_OVERRIDES_FILE))
 
     found_any_lwjgl3 = False
+
+    lib_patches: Dict[str, Dict[str, Library]] = {}
+    # remap patches to a Library indexed by its major version name
+    for k, v in get_lib_patches().items():
+        d = {}
+        for p in v:
+            d[get_major_name(p["name"])] = Library.parse_obj(p)
+        lib_patches[k] = d
 
     for filename in os.listdir(os.path.join(UPSTREAM_DIR, VERSIONS_DIR)):
         input_file = os.path.join(UPSTREAM_DIR, VERSIONS_DIR, filename)
@@ -227,6 +252,19 @@ def main():
         for lib in v.libraries:
             remove_paths_from_lib(lib)
             specifier = lib.name
+            new_libs: List[Library] = []
+
+            for name, patches in lib_patches.items():
+                lib_name = str(lib.name)
+                patch = patches.get(get_major_name(lib_name))
+                if patch == None:
+                    continue
+                print(f"Patching library {lib_name} for {name}")
+                new_lib = copy.deepcopy(patch)
+                add_or_append_arch_rule(new_lib, "allow", name)
+                new_libs.append(new_lib)
+                add_or_append_arch_rule(lib, "disallow", name)
+
             if specifier.is_lwjgl():
                 rules = None
                 if lib.rules:
@@ -235,7 +273,7 @@ def main():
                 if is_macos_only(rules):
                     print("Candidate library ", specifier, " is only for macOS and is therefore ignored.")
                     continue
-                bucket = add_or_get_bucket(buckets, rules)
+                bucket = add_or_get_bucket(buckets, lib)
                 if specifier.group == "org.lwjgl.lwjgl" and specifier.artifact == "lwjgl":
                     bucket.version = specifier.version
                 if specifier.group == "org.lwjgl" and specifier.artifact == "lwjgl":
@@ -245,6 +283,8 @@ def main():
                 if not bucket.libraries:
                     bucket.libraries = []
                 bucket.libraries.append(lib)
+                if len(new_libs) > 0:
+                    bucket.libraries.append(*new_libs)
                 bucket.release_time = v.release_time
             # FIXME: workaround for insane log4j nonsense from December 2021. Probably needs adjustment.
             elif lib.name.is_log4j():
@@ -269,6 +309,8 @@ def main():
                 ))
             else:
                 libs_minecraft.append(lib)
+                if len(new_libs) > 0:
+                    libs_minecraft.append(*new_libs)
         if len(buckets) == 1:
             for key in buckets:
                 lwjgl = buckets[key]

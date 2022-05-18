@@ -1,5 +1,6 @@
+import copy
 from datetime import datetime
-from typing import Optional, List, Dict, Any, Iterator
+from typing import Optional, List, Dict, Any, Iterator, Tuple
 
 import pydantic
 from pydantic import Field, validator
@@ -177,7 +178,7 @@ class MojangLibraryDownloads(MetaBase):
 class OSRule(MetaBase):
     @validator("name")
     def name_must_be_os(cls, v):
-        assert v in ["osx", "linux", "windows"]
+        assert v in ["osx", "osx-arm64", "linux", "windows"]
         return v
 
     name: str
@@ -210,6 +211,26 @@ class MojangLibrary(MetaBase):
     downloads: Optional[MojangLibraryDownloads]
     natives: Optional[Dict[str, str]]
     rules: Optional[MojangRules]
+    arch_rules: Optional[Dict[str, List[str]]]
+
+
+    def dict(self, **kwargs) -> Dict[str, Any]:
+        if not self.arch_rules:
+            return super().dict(**kwargs)
+        else:
+            new_self = copy.deepcopy(self)
+            assert new_self.arch_rules is not None
+            if not new_self.rules:
+                new_self.rules = MojangRules(__root__=[])
+                # if we are disallowing arch patched libraries, make sure we have a blanket allow rule first, 
+                # otherwise we will completely disable this library
+                if "disallow" in new_self.arch_rules:
+                    new_self.rules.__root__.append(MojangRule(action="allow", os=None))
+            for action, arches in new_self.arch_rules.items():
+                for arch in arches:
+                    new_self.rules.__root__.append(MojangRule(action=action, os=OSRule(name=arch, version=None)))
+            new_self.arch_rules = None
+            return new_self.dict(**kwargs)
 
 
 class Library(MojangLibrary):
