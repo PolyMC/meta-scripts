@@ -56,33 +56,6 @@ LOG4J_HASHES = {
 }
 
 
-# We want versions that contain natives for all platforms. If there are multiple, pick the latest one
-# LWJGL versions we want
-PASS_VARIANTS = [
-    "fcccb40326b2edc13dffbc49bc6fbafd7ca9b0cd",  # 3.3.1 (2022-05-04 14:41:35+00:00)
-    "ea4973ebc9eadf059f30f0958c89f330898bff51",  # 3.2.2 (2019-07-04 14:41:05+00:00)
-    "8e1f89b96c6f583a0e494949c75115ed13412ba1",  # 3.2.1 (2019-02-13 16:12:08+00:00)
-    "7ed2372097dbd635f5aef3137711141ce91c4ee9",  # 3.1.6 (2018-11-29 13:11:38+00:00)
-    "5a006b7c72a080ac673fff02b259f3127c376655",  # 3.1.2 (2018-06-21 12:57:11+00:00)
-    "a3f254df5a63a0a1635755733022029e8cfae1b3",  # 2.9.4-nightly-20150209 (2016-12-20 14:05:34+00:00)
-    "879be09c0bd0d4bafc2ea4ea3d2ab8607a0d976c",  # 2.9.3 (2015-01-30 11:58:24+00:00)
-    "8d4951d00253dfaa36a0faf1c8be541431861c30",  # 2.9.1 (2014-05-22 14:44:33+00:00)
-    "cf58c9f92fed06cb041a7244c6b4b667e6d544cc",  # 2.9.1-nightly-20131120 (2013-12-06 13:55:34+00:00)
-    "27dcadcba29a1a7127880ca1a77efa9ece866f24",  # 2.9.0 (2013-09-06 12:31:58+00:00)
-]
-
-# LWJGL versions we def. don't want!
-BAD_VARIANTS = [
-    "d986df9598fa2bcf4a5baab5edf044548e66d011",  # 3.2.2 (2021-12-10 03:36:38+00:00) only linux, windows
-    "4b73fccb9e5264c2068bdbc26f9651429abbf21a",  # 3.2.2 (2021-08-25 14:41:57+00:00) only linux, windows
-    "ab463e9ebc6a36abf22f2aa27b219dd372ff5069",  # 3.2.2 (2019-07-19 09:25:47+00:00) only linux, windows
-    "8bde129ef334023c365bd7f57512a4bf5e72a378",  # 3.2.1 (2019-04-18 11:05:19+00:00) only osx, windows
-    "65b2ce1f2b869bf98b8dd7ec0bc6956967d04811",  # 3.1.6 (2019-04-18 11:05:19+00:00) only linux
-    "f04052162b50fa1433f67e1a90bc79466c4ab776",  # 2.9.0 (2013-10-21 16:34:47+00:00) only linux, windows
-    "6442fc475f501fbd0fc4244fd1c38c02d9ebaf7e",  # 2.9.0 (2011-03-30 22:00:00+00:00) fine but newer variant available
-]
-
-
 def add_or_get_bucket(buckets, rules: Optional[MojangRules]) -> MetaVersion:
     rule_hash = None
     if rules:
@@ -204,7 +177,8 @@ def process_single_variant(lwjgl_variant: MetaVersion):
         filtered_libraries = list(filter(lambda l: l.name.artifact not in ["jutils", "jinput"], v.libraries))
         v.libraries = filtered_libraries
     else:
-        raise Exception("LWJGL version not recognized: %s" % v.version)
+        print("LWJGL version not recognized: %s" % v.version)
+        return False
 
     v.volatile = True
     v.order = -1
@@ -227,8 +201,9 @@ def process_single_variant(lwjgl_variant: MetaVersion):
                     break
     if good:
         v.write(filename)
+        return True
     else:
-        print("Skipped LWJGL", v.version)
+        return False
 
 
 def main():
@@ -357,34 +332,18 @@ def main():
             override.apply_onto_meta_version(v)
         v.write(out_filename)
 
-    for lwjglVersionVariant in lwjglVersionVariants:
-        decided_variant = None
-        passed_variants = 0
-        unknown_variants = 0
-        print("%d variant(s) for LWJGL %s:" % (len(lwjglVersionVariants[lwjglVersionVariant]), lwjglVersionVariant))
-
-        for variant in lwjglVersionVariants[lwjglVersionVariant]:
-            if variant.sha1 in BAD_VARIANTS:
-                print("Variant %s ignored because it's marked as bad." % variant.sha1)
-                continue
-            if variant.sha1 in PASS_VARIANTS:
+    for version, variants in lwjglVersionVariants.items():
+        variants: List[LWJGLEntry]
+        print("%d variant(s) for LWJGL %s:" % (len(variants), version))
+        success = False
+        # try all variants until one works, starting from newest
+        for variant in sorted(variants, key=lambda v: v.version.release_time, reverse=True):
+            if process_single_variant(variant.version):
                 print("Variant %s accepted." % variant.sha1)
-                decided_variant = variant
-                passed_variants += 1
-                continue
-            # print natives classifiers to decide which variant to use
-            n = [x.natives.keys() for x in variant.version.libraries if x.natives is not None]
-            print(n)
-
-            print(f"    \"{variant.sha1}\",  # {lwjglVersionVariant} ({variant.version.release_time})")
-            unknown_variants += 1
-        print("")
-
-        if decided_variant and passed_variants == 1 and unknown_variants == 0:
-            process_single_variant(decided_variant.version)
-        else:
-            raise Exception("No variant decided for version %s out of %d possible ones and %d unknown ones." % (
-                lwjglVersionVariant, passed_variants, unknown_variants))
+                success = True
+                break
+        if not success:
+            raise Exception(f"No variant passed for version {version}.")
 
     lwjgl_package = MetaPackage(uid=LWJGL_COMPONENT, name='LWJGL 2')
     lwjgl_package.recommended = ['2.9.4-nightly-20150209']
