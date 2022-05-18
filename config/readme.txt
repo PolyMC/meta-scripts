@@ -6,3 +6,5 @@ These are expected:
 * meta-upstream.key
 * meta-upstream.key.pub
 * s3cmd.cfg
+
+You can also create 'config_local.sh' and put any property overrides from 'config.sh'.

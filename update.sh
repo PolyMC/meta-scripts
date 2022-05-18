@@ -11,11 +11,6 @@ if [ -f config/config_local.sh ]; then
     source config/config_local.sh
 fi
 
-MODE=${MODE:-develop}
-
-BRANCH_var="BRANCH_$MODE"
-BRANCH="${!BRANCH_var}"
-
 function fail_in {
     upstream_git reset --hard HEAD
     exit 1
@@ -83,8 +78,6 @@ if [ "${DEPLOY_TO_GIT}" = true ] ; then
 fi
 
 if [ "${DEPLOY_TO_FOLDER}" = true ] ; then
-    DEPLOY_FOLDER_var="DEPLOY_FOLDER_$MODE"
-    DEPLOY_FOLDER="${!DEPLOY_FOLDER_var}"
     echo "Deploying to ${DEPLOY_FOLDER}"
     rsync -rvog --chown="${DEPLOY_FOLDER_USER}:${DEPLOY_FOLDER_GROUP}" --exclude=.git "${BASEDIR}/${PMC_DIR}/" "${DEPLOY_FOLDER}"
 fi
