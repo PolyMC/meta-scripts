@@ -296,7 +296,7 @@ def main():
 
             if specifier.is_lwjgl():
                 if has_split_natives:  # implies lwjgl3
-                    bucket = add_or_get_bucket(buckets, None)
+                    bucket = add_or_get_bucket(buckets, lib)
                     is_lwjgl_3 = True
                     found_any_lwjgl3 = True
                     bucket.version = specifier.version
@@ -312,7 +312,7 @@ def main():
                     if is_macos_only(rules):
                         print("Candidate library ", specifier, " is only for macOS and is therefore ignored.")
                         continue
-                    bucket = add_or_get_bucket(buckets, rules)
+                    bucket = add_or_get_bucket(buckets, lib)
                     if specifier.group == "org.lwjgl.lwjgl" and specifier.artifact == "lwjgl":
                         bucket.version = specifier.version
                     if specifier.group == "org.lwjgl" and specifier.artifact == "lwjgl":
