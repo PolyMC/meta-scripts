@@ -15,7 +15,6 @@ from meta.model import MetaVersion, Library, GradleSpecifier, MojangLibraryDownl
     MetaPackage, MojangRule, MojangRules, OSRule
 from meta.model.mojang import MojangIndexWrap, MojangIndex, MojangVersion, LegacyOverrideIndex
 
-APPLY_SPLIT_NATIVES_WORKAROUND = True
 
 PMC_DIR = polymc_path()
 UPSTREAM_DIR = upstream_path()
@@ -224,18 +223,6 @@ def add_or_append_arch_rule(lib: Library, action: str, arch: str):
         lib.arch_rules = {action: [arch]}
 
 
-def lib_is_split_native(lib: Library) -> bool:
-    if lib.name.classifier and lib.name.classifier.startswith("natives-"):
-        return True
-    return False
-
-
-def version_has_split_natives(v: MojangVersion) -> bool:
-    for lib in v.libraries:
-        if lib_is_split_native(lib):
-            return True
-    return False
-
 
 def main():
     # get the local version list
@@ -267,7 +254,6 @@ def main():
 
         libs_minecraft = []
         is_lwjgl_3 = False
-        has_split_natives = version_has_split_natives(v)
         buckets = {}
 
         for lib in v.libraries:
@@ -289,41 +275,26 @@ def main():
             # generic fixes
             remove_paths_from_lib(lib)
 
-            if APPLY_SPLIT_NATIVES_WORKAROUND and lib_is_split_native(lib):
-                # merge classifier into artifact name to workaround bug in launcher
-                specifier.artifact += f"-{specifier.classifier}"
-                specifier.classifier = None
-
             if specifier.is_lwjgl():
-                if has_split_natives:  # implies lwjgl3
-                    bucket = add_or_get_bucket(buckets, lib)
+                rules = None
+                if lib.rules:
+                    rules = lib.rules
+                    lib.rules = None
+                if is_macos_only(rules):
+                    print("Candidate library ", specifier, " is only for macOS and is therefore ignored.")
+                    continue
+                bucket = add_or_get_bucket(buckets, lib)
+                if specifier.group == "org.lwjgl.lwjgl" and specifier.artifact == "lwjgl":
+                    bucket.version = specifier.version
+                if specifier.group == "org.lwjgl" and specifier.artifact == "lwjgl":
                     is_lwjgl_3 = True
                     found_any_lwjgl3 = True
                     bucket.version = specifier.version
-                    if not bucket.libraries:
-                        bucket.libraries = []
-                    bucket.libraries.append(lib)
-                    bucket.release_time = v.release_time
-                else:
-                    rules = None
-                    if lib.rules:
-                        rules = lib.rules
-                        lib.rules = None
-                    if is_macos_only(rules):
-                        print("Candidate library ", specifier, " is only for macOS and is therefore ignored.")
-                        continue
-                    bucket = add_or_get_bucket(buckets, lib)
-                    if specifier.group == "org.lwjgl.lwjgl" and specifier.artifact == "lwjgl":
-                        bucket.version = specifier.version
-                    if specifier.group == "org.lwjgl" and specifier.artifact == "lwjgl":
-                        is_lwjgl_3 = True
-                        found_any_lwjgl3 = True
-                        bucket.version = specifier.version
-                    if not bucket.libraries:
-                        bucket.libraries = []
-                    bucket.libraries.append(lib)
-                    bucket.libraries.extend(new_libs)
-                    bucket.release_time = v.release_time
+                if not bucket.libraries:
+                    bucket.libraries = []
+                bucket.libraries.append(lib)
+                bucket.libraries.extend(new_libs)
+                bucket.release_time = v.release_time
             # FIXME: workaround for insane log4j nonsense from December 2021. Probably needs adjustment.
             elif lib.name.is_log4j():
                 version_override, maven_override = map_log4j_artifact(lib.name.version)
