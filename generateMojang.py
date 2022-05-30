@@ -10,10 +10,12 @@ from libPatches import get_lib_patches
 
 from meta.common import ensure_component_dir, polymc_path, upstream_path, static_path
 from meta.common.mojang import VERSION_MANIFEST_FILE, MINECRAFT_COMPONENT, LWJGL3_COMPONENT, LWJGL_COMPONENT, \
-    STATIC_OVERRIDES_FILE, VERSIONS_DIR
+    STATIC_LWJGL322_FILE, STATIC_OVERRIDES_FILE, VERSIONS_DIR
 from meta.model import MetaVersion, Library, GradleSpecifier, MojangLibraryDownloads, MojangArtifact, Dependency, \
     MetaPackage, MojangRule, MojangRules, OSRule
 from meta.model.mojang import MojangIndexWrap, MojangIndex, MojangVersion, LegacyOverrideIndex
+
+APPLY_SPLIT_NATIVES_WORKAROUND = True
 
 PMC_DIR = polymc_path()
 UPSTREAM_DIR = upstream_path()
@@ -56,7 +58,6 @@ LOG4J_HASHES = {
         }
     }
 }
-
 
 def add_or_get_bucket(buckets, lib: Library) -> MetaVersion:
     rule_hash = None
@@ -223,6 +224,19 @@ def add_or_append_arch_rule(lib: Library, action: str, arch: str):
         lib.arch_rules = {action: [arch]}
 
 
+def lib_is_split_native(lib: Library) -> bool:
+    if lib.name.classifier and lib.name.classifier.startswith("natives-"):
+        return True
+    return False
+
+
+def version_has_split_natives(v: MojangVersion) -> bool:
+    for lib in v.libraries:
+        if lib_is_split_native(lib):
+            return True
+    return False
+
+
 def main():
     # get the local version list
     override_index = LegacyOverrideIndex.parse_file(os.path.join(STATIC_DIR, STATIC_OVERRIDES_FILE))
@@ -253,9 +267,10 @@ def main():
 
         libs_minecraft = []
         is_lwjgl_3 = False
+        has_split_natives = version_has_split_natives(v)
         buckets = {}
+
         for lib in v.libraries:
-            remove_paths_from_lib(lib)
             specifier = lib.name
             new_libs: List[Library] = []
 
@@ -379,7 +394,6 @@ def main():
             override = override_index.versions[v.version]
             override.apply_onto_meta_version(v)
         v.write(out_filename)
-
     for version, variants in lwjglVersionVariants.items():
         variants: List[LWJGLEntry]
         print("%d variant(s) for LWJGL %s:" % (len(variants), version))
