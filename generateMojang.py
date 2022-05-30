@@ -190,7 +190,7 @@ def process_single_variant(lwjgl_variant: MetaVersion):
     for lib in v.libraries:
         if not lib.natives or lib.arch_rules:
             continue
-        checked_dict = {'linux', 'windows', 'osx'}
+        checked_dict = {'linux', 'windows', 'osx', 'osx-arm64'}
         if not checked_dict.issubset(lib.natives.keys()):
             print("Missing system classifier!", v.version, lib.name, lib.natives.keys())
             good = False
@@ -229,12 +229,17 @@ def main():
 
     found_any_lwjgl3 = False
 
-    lib_patches: Dict[str, Dict[str, Library]] = {}
+    lib_patches: Dict[str, Dict[str, List[Library]]] = {}
     # remap patches to a Library indexed by its major version name
     for k, v in get_lib_patches().items():
         d = {}
         for p in v:
-            d[get_major_name(p["name"])] = Library.parse_obj(p)
+            if d.get(get_major_name(p["name"])) == None:
+                d[get_major_name(p["name"])] = [Library.parse_obj(p)]
+                print(get_major_name(p["name"]))
+            else:
+                d[get_major_name(p["name"])].append(Library.parse_obj(p))
+                print(get_major_name(p["name"]))
         lib_patches[k] = d
 
     for filename in os.listdir(os.path.join(UPSTREAM_DIR, VERSIONS_DIR)):
@@ -256,14 +261,15 @@ def main():
 
             for name, patches in lib_patches.items():
                 lib_name = str(lib.name)
-                patch = patches.get(get_major_name(lib_name))
-                if patch == None:
+                patchlist = patches.get(get_major_name(lib_name))
+                if patchlist == None:
                     continue
-                print(f"Patching library {lib_name} for {name}")
-                new_lib = copy.deepcopy(patch)
-                add_or_append_arch_rule(new_lib, "allow", name)
-                new_libs.append(new_lib)
-                add_or_append_arch_rule(lib, "disallow", name)
+                for patch in patchlist:
+                    print(f"Patching library {lib_name} for {name}")
+                    new_lib = copy.deepcopy(patch)
+                    add_or_append_arch_rule(new_lib, "allow", name)
+                    new_libs.append(new_lib)
+                    add_or_append_arch_rule(lib, "disallow", name)
 
             if specifier.is_lwjgl():
                 rules = None
@@ -284,7 +290,7 @@ def main():
                     bucket.libraries = []
                 bucket.libraries.append(lib)
                 if len(new_libs) > 0:
-                    bucket.libraries.append(*new_libs)
+                    bucket.libraries.extend(new_libs)
                 bucket.release_time = v.release_time
             # FIXME: workaround for insane log4j nonsense from December 2021. Probably needs adjustment.
             elif lib.name.is_log4j():
