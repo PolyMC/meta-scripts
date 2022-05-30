@@ -67,7 +67,7 @@ def compute_jar_file(path, url):
         headers = head_file(url)
         tstamp = datetime.strptime(headers["Last-Modified"], DATETIME_FORMAT_HTTP)
     except requests.HTTPError:
-        #Just in case something changes in the future
+        # Just in case something changes in the future
         print(f"Falling back to downloading jar for {url}")
 
         jar_path = path + ".jar"

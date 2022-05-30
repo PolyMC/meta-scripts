@@ -10,7 +10,7 @@ from libPatches import get_lib_patches
 
 from meta.common import ensure_component_dir, polymc_path, upstream_path, static_path
 from meta.common.mojang import VERSION_MANIFEST_FILE, MINECRAFT_COMPONENT, LWJGL3_COMPONENT, LWJGL_COMPONENT, \
-    STATIC_OVERRIDES_FILE, VERSIONS_DIR
+    STATIC_LWJGL322_FILE, STATIC_OVERRIDES_FILE, VERSIONS_DIR
 from meta.model import MetaVersion, Library, GradleSpecifier, MojangLibraryDownloads, MojangArtifact, Dependency, \
     MetaPackage, MojangRule, MojangRules, OSRule
 from meta.model.mojang import MojangIndexWrap, MojangIndex, MojangVersion, LegacyOverrideIndex
@@ -58,7 +58,6 @@ LOG4J_HASHES = {
         }
     }
 }
-
 
 def add_or_get_bucket(buckets, lib: Library) -> MetaVersion:
     rule_hash = None
@@ -270,6 +269,7 @@ def main():
         is_lwjgl_3 = False
         has_split_natives = version_has_split_natives(v)
         buckets = {}
+
         for lib in v.libraries:
             specifier = lib.name
             new_libs: List[Library] = []
@@ -411,7 +411,6 @@ def main():
             override = override_index.versions[v.version]
             override.apply_onto_meta_version(v)
         v.write(out_filename)
-
     for version, variants in lwjglVersionVariants.items():
         variants: List[LWJGLEntry]
         print("%d variant(s) for LWJGL %s:" % (len(variants), version))
