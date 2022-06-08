@@ -319,7 +319,7 @@ def main():
             else:
                 libs_minecraft.append(lib)
                 if len(new_libs) > 0:
-                    libs_minecraft.append(*new_libs)
+                    libs_minecraft.extend(new_libs)
         if len(buckets) == 1:
             for key in buckets:
                 lwjgl = buckets[key]
