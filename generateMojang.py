@@ -138,6 +138,7 @@ def adapt_new_style_arguments(arguments):
 
 
 def is_macos_only(rules: Optional[MojangRules]):
+    return False
     allows_osx = False
     allows_all = False
     # print("Considering", specifier, "rules", rules)
@@ -181,16 +182,16 @@ def process_single_variant(lwjgl_variant: MetaVersion):
         filtered_libraries = list(filter(lambda l: l.name.artifact not in ["jutils", "jinput"], v.libraries))
         v.libraries = filtered_libraries
     else:
-        print("LWJGL version not recognized: %s" % v.version)
-        return False
-
+        raise Exception("LWJGL version not recognized: %s" % v.version)
     v.volatile = True
     v.order = -1
     good = True
     for lib in v.libraries:
         if not lib.natives or lib.arch_rules:
             continue
-        checked_dict = {'linux', 'windows', 'osx', 'osx-arm64'}
+        if lwjgl_version[0:5] != '.'.join(re.findall(r'[0-9](?=[\n\-.:]|$)', str(lib.name))[0:3]):
+            continue
+        checked_dict = {'linux', 'linux-arm64', 'windows', 'osx', 'osx-arm64'}
         if not checked_dict.issubset(lib.natives.keys()):
             print("Missing system classifier!", v.version, lib.name, lib.natives.keys())
             good = False
@@ -237,10 +238,8 @@ def main():
         for p in v:
             if d.get(get_major_name(p["name"])) == None:
                 d[get_major_name(p["name"])] = [Library.parse_obj(p)]
-                print(get_major_name(p["name"]))
             else:
                 d[get_major_name(p["name"])].append(Library.parse_obj(p))
-                print(get_major_name(p["name"]))
         lib_patches[k] = d
 
     for filename in os.listdir(os.path.join(UPSTREAM_DIR, VERSIONS_DIR)):
@@ -266,11 +265,21 @@ def main():
                 if patchlist == None:
                     continue
                 for patch in patchlist:
-                    print(f"Patching library {lib_name} for {name}")
-                    new_lib = copy.deepcopy(patch)
-                    add_or_append_arch_rule(new_lib, "allow", name)
-                    new_libs.append(new_lib)
-                    add_or_append_arch_rule(lib, "disallow", name)
+                    if 'lwjgl' in lib_name:
+                        # print('is_same_version:', patch.name == lib.name, 'patch:', patch.name, 'lib:', lib.name)
+                        if patch.name == lib.name:
+                            lwjgl_ver_patcher = '.'.join(re.findall(r'[0-9](?=[\n\-.:]|$)', lib_name)[0:3])
+                            print(f"Patching LWJGL {lib.name} for {name}")
+                            new_lib = copy.deepcopy(patch)
+                            add_or_append_arch_rule(new_lib, "allow", name)
+                            new_libs.append(new_lib)
+                            add_or_append_arch_rule(lib, "disallow", name)
+                    else:
+                        print(f"Patching library {lib_name} for {name}")
+                        new_lib = copy.deepcopy(patch)
+                        add_or_append_arch_rule(new_lib, "allow", name)
+                        new_libs.append(new_lib)
+                        add_or_append_arch_rule(lib, "disallow", name)
             
             # generic fixes
             remove_paths_from_lib(lib)
@@ -401,7 +410,7 @@ def main():
 
     if found_any_lwjgl3:
         lwjgl_package = MetaPackage(uid=LWJGL3_COMPONENT, name='LWJGL 3')
-        lwjgl_package.recommended = ['3.1.2']
+        lwjgl_package.recommended = ['3.3.1']
         lwjgl_package.write(os.path.join(PMC_DIR, LWJGL3_COMPONENT, "package.json"))
 
     mojang_index = MojangIndexWrap(MojangIndex.parse_file(os.path.join(UPSTREAM_DIR, VERSION_MANIFEST_FILE)))
