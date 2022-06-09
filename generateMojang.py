@@ -136,23 +136,6 @@ def adapt_new_style_arguments(arguments):
             pprint(arg)
     return ' '.join(foo)
 
-
-def is_macos_only(rules: Optional[MojangRules]):
-    return False
-    allows_osx = False
-    allows_all = False
-    # print("Considering", specifier, "rules", rules)
-    if rules:
-        for rule in rules:
-            if rule.action == "allow" and rule.os and rule.os.name == "osx":
-                allows_osx = True
-            if rule.action == "allow" and not rule.os:
-                allows_all = True
-        if allows_osx and not allows_all:
-            return True
-    return False
-
-
 def process_single_variant(lwjgl_variant: MetaVersion):
     lwjgl_version = lwjgl_variant.version
     v = copy.deepcopy(lwjgl_variant)
@@ -289,9 +272,6 @@ def main():
                 if lib.rules:
                     rules = lib.rules
                     lib.rules = None
-                if is_macos_only(rules):
-                    print("Candidate library ", specifier, " is only for macOS and is therefore ignored.")
-                    continue
                 bucket = add_or_get_bucket(buckets, lib)
                 if specifier.group == "org.lwjgl.lwjgl" and specifier.artifact == "lwjgl":
                     bucket.version = specifier.version
