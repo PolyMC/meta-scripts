@@ -62,7 +62,7 @@ def add_or_get_bucket(buckets, lib: Library) -> MetaVersion:
     rule_hash = None
     # if there are custom rules used to exclude arch-specific patches, use a key of "None"
     # to continue treating the library as common between all LWJGL versions
-    if lib.rules and not lib.arch_rules:
+    if lib.rules: # and not lib.arch_rules:
             rule_hash = hash(lib.rules.json())
 
     if rule_hash in buckets:
@@ -104,7 +104,7 @@ def add_lwjgl_version(variants, lwjgl):
             found = True
             break
     if not found:
-        print("!!! New variant for LWJGL version %s" % version)
+        # print("!!! New variant for LWJGL version %s" % version)
         variants[version].append(LWJGLEntry(version=lwjgl_copy, sha1=current_hash))
 
 
@@ -120,6 +120,8 @@ def adapt_new_style_arguments(arguments):
     foo = []
     # we ignore the jvm arguments entirely.
     # grab the strings, log the complex stuff
+    # Added demo mode and width/height checks
+    # to reduce console spam
     for arg in arguments.game:
         if isinstance(arg, str):
             if arg == '--clientId':
@@ -131,6 +133,15 @@ def adapt_new_style_arguments(arguments):
             if arg == '${auth_xuid}':
                 continue
             foo.append(arg)
+        elif isinstance(arg, dict):
+            if 'value' in arg:
+                if arg['value'] == '--demo':
+                    # Just an arg to activate demo mode, ignore
+                    continue
+                elif isinstance(arg['value'], list):
+                    if arg['value'][0] == '--width':
+                        # Width/height args, IDK why these are here
+                        continue
         else:
             print("!!! Unrecognized structure in Minecraft game arguments:")
             pprint(arg)
@@ -172,7 +183,10 @@ def process_single_variant(lwjgl_variant: MetaVersion):
     for lib in v.libraries:
         if not lib.natives or lib.arch_rules:
             continue
+        searchingFor = lwjgl_version[0:5]
+        foundLWJGL_re = '.'.join(re.findall(r'[0-9](?=[\n\-.:]|$)', str(lib.name))[0:3])
         if lwjgl_version[0:5] != '.'.join(re.findall(r'[0-9](?=[\n\-.:]|$)', str(lib.name))[0:3]):
+            # print(f"Warning: LWJGL versions searchingFor: {lwjgl_version} and found: {foundLWJGL_re} not the same!")
             continue
         checked_dict = {'linux', 'linux-arm64', 'windows', 'osx', 'osx-arm64'}
         if not checked_dict.issubset(lib.natives.keys()):
@@ -252,13 +266,13 @@ def main():
                         # print('is_same_version:', patch.name == lib.name, 'patch:', patch.name, 'lib:', lib.name)
                         if patch.name == lib.name:
                             lwjgl_ver_patcher = '.'.join(re.findall(r'[0-9](?=[\n\-.:]|$)', lib_name)[0:3])
-                            print(f"Patching LWJGL {lib.name} for {name}")
+                            # print(f"Patching LWJGL {lib.name} for {name}")
                             new_lib = copy.deepcopy(patch)
                             add_or_append_arch_rule(new_lib, "allow", name)
                             new_libs.append(new_lib)
                             add_or_append_arch_rule(lib, "disallow", name)
                     else:
-                        print(f"Patching library {lib_name} for {name}")
+                        # print(f"Patching library {lib_name} for {name}")
                         new_lib = copy.deepcopy(patch)
                         add_or_append_arch_rule(new_lib, "allow", name)
                         new_libs.append(new_lib)
@@ -314,7 +328,7 @@ def main():
                 lwjgl = buckets[key]
                 lwjgl.libraries = sorted(lwjgl.libraries, key=attrgetter("name"))
                 add_lwjgl_version(lwjglVersionVariants, lwjgl)
-                print("Found only candidate LWJGL", lwjgl.version, key)
+                # print("Found only candidate LWJGL", lwjgl.version, key)
         else:
             # multiple buckets for LWJGL. [None] is common to all, other keys are for different sets of rules
             for key in buckets:
@@ -326,7 +340,7 @@ def main():
                 else:
                     lwjgl.libraries = sorted(lwjgl.libraries, key=attrgetter('name'))
                 add_lwjgl_version(lwjglVersionVariants, lwjgl)
-                print("Found candidate LWJGL", lwjgl.version, key)
+                # print("Found candidate LWJGL", lwjgl.version, key)
             # remove the common bucket...
             if None in buckets:
                 del buckets[None]
@@ -371,14 +385,20 @@ def main():
             override = override_index.versions[v.version]
             override.apply_onto_meta_version(v)
         v.write(out_filename)
+    print("#"*50)
     for version, variants in lwjglVersionVariants.items():
         variants: List[LWJGLEntry]
         print("%d variant(s) for LWJGL %s:" % (len(variants), version))
+        # debugging
+        variantVers = []
+        for variant in variants:
+            variantVers.append(variant.version.version)
+        print("which are: " + ', '.join((variantVers)))
         success = False
         # try all variants until one works, starting from newest
         for variant in sorted(variants, key=lambda v: v.version.release_time, reverse=True):
             if process_single_variant(variant.version):
-                print("Variant %s accepted." % variant.sha1)
+                print("Variant %s accepted." % variant.version.version)
                 success = True
                 break
         if not success:
