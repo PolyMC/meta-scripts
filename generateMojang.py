@@ -175,6 +175,9 @@ def process_single_variant(lwjgl_variant: MetaVersion):
         # this is a dependency that Mojang kept in, but doesn't belong there anymore
         filtered_libraries = list(filter(lambda l: l.name.artifact not in ["jutils", "jinput"], v.libraries))
         v.libraries = filtered_libraries
+        if os.path.isfile(static_filename):
+            v.write(filename)
+            return True
     else:
         raise Exception("LWJGL version not recognized: %s" % v.version)
     v.volatile = True
