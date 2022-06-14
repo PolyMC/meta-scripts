@@ -298,6 +298,7 @@ def main():
                     bucket.version = specifier.version
                 if not bucket.libraries:
                     bucket.libraries = []
+                lib.rules = rules #maaaybe fix? YES IT FIXES IT WOOO HOO YES YESSSSSSSSSSSSSSSSSSSSSSSSS!!!!!!!!!!!!!!! LETS GOOOOOO
                 bucket.libraries.append(lib)
                 bucket.libraries.extend(new_libs)
                 bucket.release_time = v.release_time
