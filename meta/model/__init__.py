@@ -69,6 +69,18 @@ class GradleSpecifier:
 
     def __hash__(self):
         return hash(str(self))
+        
+    def is_archdependent(self):
+        if "lwjgl" in self.group:               # LWJGL
+            return True
+        elif "objc" in self.artifact:           # Java-ObjC-Bridge
+            return True
+        # elif "jna" in self.group:             # Java Native Access
+        #     return True                       # Not needed due to JNA being smart and doing the platform stuff for us
+        # elif "text2speech" in self.artifact:  # Text2Speech is borked man
+        #    return True
+        else:
+            return False
 
     @classmethod
     def __get_validators__(cls):
@@ -212,6 +224,8 @@ class MojangLibrary(MetaBase):
     natives: Optional[Dict[str, str]]
     rules: Optional[MojangRules]
     arch_rules: Optional[Dict[str, List[str]]]
+    
+    traits: Optional[List[str]]
 
 
     def dict(self, **kwargs) -> Dict[str, Any]:
@@ -231,6 +245,13 @@ class MojangLibrary(MetaBase):
                     new_self.rules.__root__.append(MojangRule(action=action, os=OSRule(name=arch, version=None)))
             new_self.arch_rules = None
             return new_self.dict(**kwargs)
+            
+    def add_archdependent_trait(self):
+        if self.name.is_archdependent():
+            if self.traits:
+                self.traits.append("ArchDependent")
+            else:
+                self.traits = ["ArchDependent"]
 
 
 class Library(MojangLibrary):

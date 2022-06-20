@@ -219,7 +219,8 @@ def get_major_name(name: str):
 
 def add_or_append_arch_rule(lib: Library, action: str, arch: str):
     if lib.arch_rules:
-        lib.arch_rules[action].append(arch)
+        if arch not in lib.arch_rules[action]:
+            lib.arch_rules[action].append(arch)
     else:
         lib.arch_rules = {action: [arch]}
 
@@ -265,21 +266,17 @@ def main():
                 if patchlist == None:
                     continue
                 for patch in patchlist:
-                    if 'lwjgl' in lib_name:
-                        # print('is_same_version:', patch.name == lib.name, 'patch:', patch.name, 'lib:', lib.name)
-                        if patch.name == lib.name:
-                            lwjgl_ver_patcher = '.'.join(re.findall(r'[0-9](?=[\n\-.:]|$)', lib_name)[0:3])
-                            # print(f"Patching LWJGL {lib.name} for {name}")
-                            new_lib = copy.deepcopy(patch)
-                            add_or_append_arch_rule(new_lib, "allow", name)
-                            new_libs.append(new_lib)
-                            add_or_append_arch_rule(lib, "disallow", name)
-                    else:
-                        # print(f"Patching library {lib_name} for {name}")
+                    if patch.name == lib.name:
+                        #print(f"Patching library {lib_name} for {name}")
                         new_lib = copy.deepcopy(patch)
                         add_or_append_arch_rule(new_lib, "allow", name)
                         new_libs.append(new_lib)
-                        add_or_append_arch_rule(lib, "disallow", name)
+                        # Purpose of this if is to remove duplicate disallow rules
+                        if lib.arch_rules == None or name not in lib.arch_rules["disallow"]:
+                            # print("Adding disallow rule for lib " + str(lib.name) + " and arch " + name)
+                            add_or_append_arch_rule(lib, "disallow", name)
+                        # New traits system for libs just for the launcher to check if it needs to append the arch in the filename
+                        new_lib.add_archdependent_trait()
             
             # generic fixes
             remove_paths_from_lib(lib)
@@ -298,10 +295,14 @@ def main():
                     bucket.version = specifier.version
                 if not bucket.libraries:
                     bucket.libraries = []
-                lib.rules = rules #maaaybe fix? YES IT FIXES IT WOOO HOO YES YESSSSSSSSSSSSSSSSSSSSSSSSS!!!!!!!!!!!!!!! LETS GOOOOOO
+                lib.rules = rules # maaaybe fix? YES IT FIXES IT WOOO HOO YES YESSSSSSSSSSSSSSSSSSSSSSSSS!!!!!!!!!!!!!!! LETS GOOOOOO
+                # New traits system for libs just for the launcher to check if it needs to append the arch in the filename
+                lib.add_archdependent_trait()
+               
                 bucket.libraries.append(lib)
                 bucket.libraries.extend(new_libs)
                 bucket.release_time = v.release_time
+                
             # FIXME: workaround for insane log4j nonsense from December 2021. Probably needs adjustment.
             elif lib.name.is_log4j():
                 version_override, maven_override = map_log4j_artifact(lib.name.version)
@@ -324,6 +325,7 @@ def main():
                     downloads=MojangLibraryDownloads(artifact=artifact)
                 ))
             else:
+                lib.add_archdependent_trait()
                 libs_minecraft.append(lib)
                 if len(new_libs) > 0:
                     libs_minecraft.extend(new_libs)
