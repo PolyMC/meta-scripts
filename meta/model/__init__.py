@@ -5,7 +5,7 @@ from typing import Optional, List, Dict, Any, Iterator, Tuple
 import pydantic
 from pydantic import Field, validator
 
-from ..common import serialize_datetime
+from ..common import serialize_datetime, replace_old_launchermeta_url
 
 META_FORMAT_VERSION = 1
 
@@ -157,6 +157,10 @@ class MojangArtifactBase(MetaBase):
 
 
 class MojangAssets(MojangArtifactBase):
+    @validator("url")
+    def validate_url(cls, v):
+        return replace_old_launchermeta_url(v)
+
     id: str
     totalSize: int
 
