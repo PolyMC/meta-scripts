@@ -25,9 +25,9 @@ def get_lib_patches():
                 "downloads": {
                     "classifiers": {
                         "natives-osx": {
-                            "sha1": "53f9c919f34d2ca9de8c51fc4e1e8282029a9232",
-                            "size": 12186,
-                            "url": "https://libraries.minecraft.net/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-osx.jar",
+                            "sha1": "5189eb40db3087fb11ca063b68fa4f4c20b199dd",
+                            "size": 10031,
+                            "url": "https://github.com/r58Playz/jinput-m1/raw/main/plugins/OSX/bin/jinput-platform-2.0.5.jar",
                         }
                     }
                 },
@@ -1285,9 +1285,9 @@ def get_lib_patches():
                 "downloads": {
                     "classifiers": {
                         "natives-linux": {
-                            "sha1": "7ff832a6eb9ab6a767f1ade2b548092d0fa64795",
-                            "size": 10362,
-                            "url": "https://libraries.minecraft.net/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-linux.jar",
+                            "sha1": "5aa2edeb64ddfe117d5985152280b55864ce694a",
+                            "size": 6266,
+                            "url": "https://github.com/r58Playz/lwjgl2-m1/raw/linux-aarch64-built/jinput-platform-2.0.5.jar",
                         }
                     }
                 },
