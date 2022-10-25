@@ -1,5 +1,4 @@
 # important that this runs *AFTER* any mojang server-related scripts. it depends on normal launcher files already being there
-import hashlib
 import json
 import os
 from urllib.request import urlopen
