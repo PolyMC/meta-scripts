@@ -13,10 +13,6 @@ net_minecraft_files = os.listdir(os.path.join(PMC_DIR, MINECRAFT_COMPONENT))
 
 def gen_compatible_meta_obj(version_meta):
     out = {
-        "+jvmArgs": [
-            "-Dhttp.proxyHost=betacraft.uk",
-            "-Djava.util.Arrays.useLegacyMergeSort=true"
-        ],
         "assetIndex": version_meta["assetIndex"],
         "compatibleJavaMajors": [8],
         "formatVersion": 1,
@@ -42,16 +38,17 @@ def gen_compatible_meta_obj(version_meta):
         "version": meta_id
     }
 
-    # assign proper traits depending on version type
+    # make needed changes depending on version type
     if version_meta["type"] == "old_alpha":
+        out["+jvmArgs"] = ["-Dhttp.proxyHost=betacraft.uk", "-Djava.util.Arrays.useLegacyMergeSort=true"]
         out["+traits"] = ["legacyLaunch", "no-texturepacks"]
     elif version_meta["type"] == "old_beta":
         out["+traits"] = ["legacyLaunch", "texturepacks"]
 
-    # need launchwrapper and jopt libraries for these versions to run
+    # need launchwrapper, jopt, and asm-all for these versions to run
     out["libraries"] = []
     for library in version_meta["libraries"]:
-        if "launchwrapper" in library["name"] or "jopt" in library["name"]:
+        if "launchwrapper" in library["name"] or "jopt" in library["name"] or "asm-all" in library["name"]:
             out["libraries"].append(library)
     
     return out
