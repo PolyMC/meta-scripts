@@ -218,8 +218,8 @@ def version_from_build_system_installer(installer: MojangVersion, profile: Forge
     wrapper_lib = Library(name=GradleSpecifier("io.github.zekerzhayard", "ForgeWrapper", "mmc2"))
     wrapper_lib.downloads = MojangLibraryDownloads()
     wrapper_lib.downloads.artifact = MojangArtifact(url=FORGEWRAPPER_MAVEN % (wrapper_lib.name.path()),
-                                                    sha1="4ee5f25cc9c7efbf54aff4c695da1054c1a1d7a3",
-                                                    size=34444)
+                                                    sha1="b9fa1c59a6f2d665524ef366f9b3ec797cb596e6",
+                                                    size=36085)
     v.libraries.append(wrapper_lib)
 
     for upstream_lib in installer.libraries:
