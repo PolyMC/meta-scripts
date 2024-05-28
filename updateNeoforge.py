@@ -98,6 +98,7 @@ def main():
                                      + entry.version, stream=True)
                     if "files" not in rfile.json():
                         eprint(f"Skipping {entry.sane_version()} with no valid files")
+                        entries.remove(entry)
                         continue
 
                 eprint(f"Downloading {entry.installer_url()}")
