@@ -14,7 +14,7 @@ from cachecontrol import CacheControl
 from cachecontrol.caches import FileCache
 
 from meta.common import upstream_path, ensure_upstream_dir
-from meta.common.neoforge import JARS_DIR, INSTALLER_MANIFEST_DIR, VERSION_MANIFEST_DIR, INSTALLER_HASH_DIR
+from meta.common.neoforge import JARS_DIR, INSTALLER_MANIFEST_DIR, VERSION_MANIFEST_DIR
 from meta.model.mojang import MojangVersion
 from meta.model.neoforge import NeoForgeEntry, NeoForgeInstallerProfile
 
@@ -23,7 +23,6 @@ UPSTREAM_DIR = upstream_path()
 ensure_upstream_dir(JARS_DIR)
 ensure_upstream_dir(INSTALLER_MANIFEST_DIR)
 ensure_upstream_dir(VERSION_MANIFEST_DIR)
-ensure_upstream_dir(INSTALLER_HASH_DIR)
 
 forever_cache = FileCache('caches/http_cache', forever=True)
 sess = CacheControl(requests.Session(), forever_cache)
@@ -44,6 +43,11 @@ def main():
     r.raise_for_status()
     by_mc_version = map_minecraft_ver_to_neo_forge_ver(r.json()["versions"])
     assert type(by_mc_version) is dict
+
+    # separately retrieve legacy 1.20.1 versions
+    r = sess.get('https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/forge')
+    r.raise_for_status()
+    by_mc_version["1.20.1"] = r.json()["versions"]
 
     entries = []
     latest_set = {v[-1] for _, v in by_mc_version.items()}
@@ -66,38 +70,42 @@ def main():
 
     print("Grabbing installers and dumping installer profiles...")
     # get the installer jars - if needed - and get the installer profiles out of them
+
+    latest_legacy = None
+
     for entry in entries:
-        eprint(f"Updating NeoForge {entry.version}")
+        # bad, inconsistent version with no files, just skip
+        if entry.version == "47.1.82":
+            entries.remove(entry)
+            continue
+
+        eprint(f"Updating NeoForge {entry.sane_version()}")
         if entry.mc_version is None:
             eprint(f"Skipping {entry.version} with invalid MC version")
             continue
 
-        if entry.installer_url() is None:
-            eprint(f"Skipping {entry.version} with no valid installer")
-            continue
-
         jar_path = os.path.join(UPSTREAM_DIR, JARS_DIR, entry.installer_filename())
-        version_path = os.path.join(UPSTREAM_DIR, VERSION_MANIFEST_DIR, f"{entry.version}.json")
-        profile_path = os.path.join(UPSTREAM_DIR, INSTALLER_MANIFEST_DIR, f"{entry.version}.json")
-        hash_path = os.path.join(UPSTREAM_DIR, INSTALLER_HASH_DIR, f"{entry.version}.txt")
+        version_path = os.path.join(UPSTREAM_DIR, VERSION_MANIFEST_DIR, f"{entry.sane_version()}.json")
+        profile_path = os.path.join(UPSTREAM_DIR, INSTALLER_MANIFEST_DIR, f"{entry.sane_version()}.json")
 
         installer_refresh_required = not os.path.isfile(profile_path)
 
         if installer_refresh_required:
             # grab the installer if it's not there
             if not os.path.isfile(jar_path):
-                eprint(f"Downloading {entry.installer_url()}")
-                rfile = sess.get(entry.installer_url(), stream=True)
-                rfile.raise_for_status()
-                with open(jar_path, 'wb') as f:
-                    for chunk in rfile.iter_content(chunk_size=128):
-                        f.write(chunk)
+                if entry.mc_version == "1.20.1":
+                    rfile = sess.get("https://maven.neoforged.net/api/maven/details/releases/net/neoforged/forge/"
+                                     + entry.version, stream=True)
+                    if "files" not in rfile.json():
+                        eprint(f"Skipping {entry.sane_version()} with no valid files")
+                        continue
 
-                eprint(f"Downloading {entry.installer_url()}.sha1")
-                hashfile = sess.get(entry.installer_url() + ".sha1", stream=True)
-                hashfile.raise_for_status()
-                with open(hash_path, 'w') as f:
-                    f.write(hashfile.text)
+                eprint(f"Downloading {entry.installer_url()}")
+                installer_file = sess.get(entry.installer_url(), stream=True)
+                installer_file.raise_for_status()
+                with open(jar_path, 'wb') as f:
+                    for chunk in installer_file.iter_content(chunk_size=128):
+                        f.write(chunk)
 
         entry.installer_size = os.path.getsize(jar_path)
 
@@ -107,12 +115,16 @@ def main():
                 sha1.update(block)
             computed_hash = sha1.hexdigest()
 
-        with open(hash_path, 'r') as f:
-            upstream_hash = f.read()
+        if entry.mc_version != "1.20.1":
+            eprint(f"Downloading {entry.installer_url()}.sha1")
+            hashfile = sess.get(entry.installer_url() + ".sha1", stream=True)
+            hashfile.raise_for_status()
+            upstream_hash = hashfile.text
 
-        if upstream_hash != computed_hash:
-            eprint(f"Skipping {entry.version} installer with invalid hash")
-            continue
+            if upstream_hash != computed_hash:
+                eprint(f"Skipping {entry.sane_version()} installer with invalid hash")
+                continue
+        entry.installer_sha1 = computed_hash
 
         eprint(f"Processing {entry.installer_url()}")
         if not os.path.isfile(profile_path):
@@ -135,6 +147,12 @@ def main():
                     with open(profile_path, 'w') as profile_json:
                         json.dump(json.loads(install_profile_data), profile_json, sort_keys=True, indent=4)
                         profile_json.close()
+
+        if entry.mc_version == "1.20.1":
+            latest_legacy = entry
+
+    if latest_legacy is not None:
+        latest_legacy.latest = True
 
     print("")
     print("Dumping index files...")

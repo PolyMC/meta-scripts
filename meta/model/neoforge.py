@@ -10,6 +10,7 @@ class NeoForgeEntry(MetaBase):
     version: str
     mc_version: str
     latest: bool
+    installer_sha1: Optional[str]
     installer_size: Optional[int]
 
     @staticmethod
@@ -18,14 +19,19 @@ class NeoForgeEntry(MetaBase):
             version=obj["version"],
             mc_version=obj["mc_version"],
             latest=obj["latest"],
+            installer_sha1=obj["installer_sha1"],
             installer_size=obj["installer_size"]
         )
 
+    def sane_version(self):
+        return self.version.split('-')[1] if self.mc_version == "1.20.1" else self.version
+
     def installer_filename(self):
-        return f"neoforge-{self.version}-installer.jar"
+        return f"{"forge" if self.mc_version == "1.20.1" else "neoforge"}-{self.version}-installer.jar"
 
     def installer_url(self):
-        return f"https://maven.neoforged.net/releases/net/neoforged/neoforge/{self.version}/{self.installer_filename()}"
+        name = "forge" if self.mc_version == "1.20.1" else "neoforge"
+        return f"https://maven.neoforged.net/releases/net/neoforged/{name}/{self.version}/{self.installer_filename()}"
 
 
 class NeoForgeInstallerProfile(MetaBase):

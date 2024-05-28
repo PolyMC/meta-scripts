@@ -4,8 +4,7 @@ import sys
 
 from meta.common import ensure_component_dir, polymc_path, upstream_path, static_path
 from meta.common.mojang import MINECRAFT_COMPONENT
-from meta.common.neoforge import NEOFORGE_COMPONENT, INSTALLER_MANIFEST_DIR, VERSION_MANIFEST_DIR, INSTALLER_HASH_DIR, \
-    DERIVED_INDEX_FILE, FORGEWRAPPER_MAVEN
+from meta.common.neoforge import NEOFORGE_COMPONENT, INSTALLER_MANIFEST_DIR, VERSION_MANIFEST_DIR, DERIVED_INDEX_FILE
 from meta.model import MetaVersion, Dependency, Library, GradleSpecifier, MojangLibraryDownloads, MojangArtifact, \
     MetaPackage
 from meta.model.mojang import MojangVersion
@@ -24,7 +23,7 @@ def eprint(*args, **kwargs):
 
 def version_from_installer(installer: MojangVersion, profile: NeoForgeInstallerProfile,
                            entry: NeoForgeEntry) -> MetaVersion:
-    v = MetaVersion(name="NeoForge", version=entry.version, uid=NEOFORGE_COMPONENT)
+    v = MetaVersion(name="NeoForge", version=entry.sane_version(), uid=NEOFORGE_COMPONENT)
     v.requires = [Dependency(uid=MINECRAFT_COMPONENT, equals=entry.mc_version)]
     v.main_class = "io.github.zekerzhayard.forgewrapper.installer.Main"
 
@@ -33,15 +32,13 @@ def version_from_installer(installer: MojangVersion, profile: NeoForgeInstallerP
 
     # load the locally cached installer file info and use it to add the installer entry in the json
     installer_lib = Library(
-        name=GradleSpecifier("net.neoforged", "neoforge", entry.version, "installer"))
+        name=GradleSpecifier("net.neoforged", "forge" if entry.mc_version == "1.20.1" else "neoforge",
+                             entry.version, "installer"))
     installer_lib.downloads = MojangLibraryDownloads()
-
-    with open(os.path.join(UPSTREAM_DIR, INSTALLER_HASH_DIR, f"{entry.version}.txt"), "r") as f:
-        installer_sha1 = f.read()
 
     installer_lib.downloads.artifact = MojangArtifact(
         url=entry.installer_url(),
-        sha1=installer_sha1,
+        sha1=entry.installer_sha1,
         size=entry.installer_size)
     v.maven_files.append(installer_lib)
 
@@ -90,20 +87,20 @@ def main():
 
     for entry in entries:
         if not os.path.isfile(os.path.join(PMC_DIR, MINECRAFT_COMPONENT, f"{entry.mc_version}.json")):
-            eprint(f"Skipping NeoForge {entry.version} with no corresponding Minecraft version {entry.mc_version}")
+            eprint(f"Skipping NeoForge {entry.sane_version()} with no corresponding Minecraft version {entry.mc_version}")
             continue
 
         if entry.latest:
-            recommended_versions.append(entry.version)
+            recommended_versions.append(entry.sane_version())
 
         # Path for new-style build system based installers
-        profile_filepath = os.path.join(UPSTREAM_DIR, INSTALLER_MANIFEST_DIR, f"{entry.version}.json")
-        installer_version_filepath = os.path.join(UPSTREAM_DIR, VERSION_MANIFEST_DIR, f"{entry.version}.json")
+        profile_filepath = os.path.join(UPSTREAM_DIR, INSTALLER_MANIFEST_DIR, f"{entry.sane_version()}.json")
+        installer_version_filepath = os.path.join(UPSTREAM_DIR, VERSION_MANIFEST_DIR, f"{entry.sane_version()}.json")
 
         if not os.path.isfile(profile_filepath):
-            eprint(f"Skipping {entry.version} with missing profile json")
+            eprint(f"Skipping {entry.sane_version()} with missing profile json")
             continue
-        eprint(f"Processing NeoForge {entry.version}")
+        eprint(f"Processing NeoForge {entry.sane_version()}")
         profile = NeoForgeInstallerProfile.parse_file(profile_filepath)
         installer = MojangVersion.parse_file(installer_version_filepath)
         v = version_from_installer(installer, profile, entry)
