@@ -54,7 +54,7 @@ def version_from_installer(installer: MojangVersion, profile: NeoForgeInstallerP
 
     v.libraries = []
 
-    wrapper_lib = Library(name=GradleSpecifier("io.github.zekerzhayard", "ForgeWrapper", "1.5.8-poly1"))
+    wrapper_lib = Library(name=GradleSpecifier("io.github.zekerzhayard", "ForgeWrapper", "1.6.0"))
     wrapper_lib.downloads = MojangLibraryDownloads()
     wrapper_lib.downloads.artifact = MojangArtifact(
         url="https://github.com/ZekerZhayard/ForgeWrapper/releases/download/1.6.0/ForgeWrapper-1.6.0.jar",
