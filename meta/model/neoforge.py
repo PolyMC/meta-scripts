@@ -35,13 +35,11 @@ class NeoForgeEntry(MetaBase):
 
 
 class NeoForgeInstallerProfile(MetaBase):
-    _comment: Optional[List[str]]
     spec: Optional[int]
     profile: Optional[str]
     version: Optional[str]
     icon: Optional[str]
     json_data: Optional[str] = Field(alias="json")
-    path: Optional[GradleSpecifier]
     logo: Optional[str]
     minecraft: Optional[str]
     welcome: Optional[str]

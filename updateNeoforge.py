@@ -14,7 +14,7 @@ from cachecontrol import CacheControl
 from cachecontrol.caches import FileCache
 
 from meta.common import upstream_path, ensure_upstream_dir
-from meta.common.neoforge import JARS_DIR, INSTALLER_MANIFEST_DIR, VERSION_MANIFEST_DIR
+from meta.common.neoforge import JARS_DIR, INSTALLER_MANIFEST_DIR, VERSION_MANIFEST_DIR, BAD_VERSIONS
 from meta.model.mojang import MojangVersion
 from meta.model.neoforge import NeoForgeEntry, NeoForgeInstallerProfile
 
@@ -47,7 +47,7 @@ def main():
     # separately retrieve legacy 1.20.1 versions
     r = sess.get('https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/forge')
     r.raise_for_status()
-    by_mc_version["1.20.1"] = r.json()["versions"]
+    by_mc_version["1.20.1"] = [v for v in r.json()["versions"] if v not in BAD_VERSIONS]
 
     entries = []
     latest_set = {v[-1] for _, v in by_mc_version.items()}
@@ -71,18 +71,8 @@ def main():
     print("Grabbing installers and dumping installer profiles...")
     # get the installer jars - if needed - and get the installer profiles out of them
 
-    latest_legacy = None
-
     for entry in entries:
-        # bad, inconsistent version with no files, just skip
-        if entry.version == "47.1.82":
-            entries.remove(entry)
-            continue
-
         eprint(f"Updating NeoForge {entry.sane_version()}")
-        if entry.mc_version is None:
-            eprint(f"Skipping {entry.version} with invalid MC version")
-            continue
 
         jar_path = os.path.join(UPSTREAM_DIR, JARS_DIR, entry.installer_filename())
         version_path = os.path.join(UPSTREAM_DIR, VERSION_MANIFEST_DIR, f"{entry.sane_version()}.json")
@@ -125,6 +115,7 @@ def main():
             if upstream_hash != computed_hash:
                 eprint(f"Skipping {entry.sane_version()} installer with invalid hash")
                 continue
+
         entry.installer_sha1 = computed_hash
 
         eprint(f"Processing {entry.installer_url()}")
@@ -148,12 +139,6 @@ def main():
                     with open(profile_path, 'w') as profile_json:
                         json.dump(json.loads(install_profile_data), profile_json, sort_keys=True, indent=4)
                         profile_json.close()
-
-        if entry.mc_version == "1.20.1":
-            latest_legacy = entry
-
-    if latest_legacy is not None:
-        latest_legacy.latest = True
 
     print("")
     print("Dumping index files...")
