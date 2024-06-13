@@ -33,8 +33,9 @@ def eprint(*args, **kwargs):
 
 
 def map_minecraft_ver_to_neo_forge_ver(neo_forge_version_list: list[str]) -> dict[str, list[str]]:
-    return {k: list(v) for k, v in
-            itertools.groupby(neo_forge_version_list, lambda x: "1." + ".".join(x.split(".")[:2]))}
+    return {k: list(v) for k, v in itertools.groupby(
+        neo_forge_version_list,
+        lambda x: "1." + ".".join(v for v in x.split(".")[:2] if v != "0"))}
 
 
 def main():
