@@ -4,8 +4,8 @@ public/*/
 
 caches/
 !caches/*/.keep
-.idea/
 __pycache__
 config_local.sh
 polymc
 upstream
+venv
