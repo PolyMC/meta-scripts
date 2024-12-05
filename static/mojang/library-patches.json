@@ -2009,5 +2009,51 @@
       },
       "name": "org.lwjgl:lwjgl-glfw-natives-linux:3.3.2-lwjgl.1"
     }
+  },
+  {
+    "_comment": "Add osx-arm64 support for LWJGL 3.3.2",
+    "match": [
+      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.2"
+    ],
+    "override": {
+      "rules": [
+        {
+          "action": "allow",
+          "os": {
+            "name": "osx-arm64"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_comment": "Add osx-arm64 support for LWJGL 3.3.3",
+    "match": [
+      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.3"
+    ],
+    "override": {
+      "rules": [
+        {
+          "action": "allow",
+          "os": {
+            "name": "osx-arm64"
+          }
+        }
+      ]
+    }
   }
 ]
