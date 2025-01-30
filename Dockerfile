@@ -1,8 +1,8 @@
-FROM python:3.10.2-bullseye
+FROM python:3.12.4-bullseye
 ARG UID=1337
 ARG GID=1337
 
-RUN pip install cachecontrol requests lockfile packaging pydantic \
+RUN pip install 'cachecontrol[filecache]' requests lockfile packaging 'pydantic<2.0.0' \
     && apt-get update && apt-get install -y rsync cron
 
 # add our cronjob

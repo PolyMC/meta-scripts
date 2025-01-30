@@ -94,10 +94,20 @@ def main():
     for component in components:
         index = get_json_file(os.path.join(UPSTREAM_DIR, META_DIR, f"{component}.json"),
                               "https://meta.quiltmc.org/v3/versions/" + component)
-        for it in index:
-            print(f"Processing {component} {it['version']} ")
-            jar_maven_url = get_maven_url(it["maven"], "https://maven.quiltmc.org/repository/release/", ".jar")
-            compute_jar_file(os.path.join(UPSTREAM_DIR, JARS_DIR, transform_maven_key(it["maven"])), jar_maven_url)
+
+        def filter_index():
+            for it in index:
+                print(f"Processing {component} {it['version']} ")
+                jar_maven_url = get_maven_url(it["maven"], "https://maven.quiltmc.org/repository/release/", ".jar")
+                try:
+                    compute_jar_file(os.path.join(UPSTREAM_DIR, JARS_DIR, transform_maven_key(it["maven"])), jar_maven_url)
+                except requests.HTTPError:
+                    continue
+                yield it
+
+        index = list(filter_index())
+
+        json.dump(index, open(os.path.join(UPSTREAM_DIR, META_DIR, f"{component}.json"), "w"), sort_keys=True, indent=4)
 
     # for each loader, download installer JSON file from maven
     with open(os.path.join(UPSTREAM_DIR, META_DIR, "loader.json"), 'r', encoding='utf-8') as loaderVersionIndexFile:
@@ -105,7 +115,10 @@ def main():
         for it in loader_version_index:
             print(f"Downloading JAR info for loader {it['version']} ")
             maven_url = get_maven_url(it["maven"], "https://maven.quiltmc.org/repository/release/", ".json")
-            get_json_file(os.path.join(UPSTREAM_DIR, INSTALLER_INFO_DIR, f"{it['version']}.json"), maven_url)
+            try:
+                get_json_file(os.path.join(UPSTREAM_DIR, INSTALLER_INFO_DIR, f"{it['version']}.json"), maven_url)
+            except requests.HTTPError:
+                pass
 
 
 if __name__ == '__main__':
