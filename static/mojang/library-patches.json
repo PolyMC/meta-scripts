@@ -982,7 +982,7 @@
           "classifiers": {
             "natives-linux-arm32": {
               "sha1": "3af5599c74dd76dd8dbb567b3f9b4963a6abeed5",
-              "size": 56388,						
+              "size": 56388,
               "url": "https://github.com/theofficialgman/lwjgl3-binaries-arm32/raw/lwjgl-3.2.2/lwjgl-opengl-natives-linux-arm32.jar"
             }
           }
@@ -1609,15 +1609,23 @@
     }
   },
   {
-    "_comment": "Only allow windows-arm64 for existing LWJGL 3.3.1",
+    "_comment": "Only allow windows-arm64 for existing LWJGL 3.3.3",
     "match": [
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.1",
-      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.1",
-      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.1",
-      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.1",
-      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.1",
-      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.1",
-      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.1"
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.6"
     ],
     "override": {
       "rules": [
