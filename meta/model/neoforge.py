@@ -27,7 +27,8 @@ class NeoForgeEntry(MetaBase):
         return self.version.split('-')[1] if self.mc_version == "1.20.1" else self.version
 
     def installer_filename(self):
-        return f"{"forge" if self.mc_version == "1.20.1" else "neoforge"}-{self.version}-installer.jar"
+        loader = "forge" if self.mc_version == "1.20.1" else "neoforge"
+        return f"{loader}-{self.version}-installer.jar"
 
     def installer_url(self):
         name = "forge" if self.mc_version == "1.20.1" else "neoforge"
