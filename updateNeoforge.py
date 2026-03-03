@@ -78,26 +78,25 @@ def main():
         jar_path = os.path.join(UPSTREAM_DIR, JARS_DIR, entry.installer_filename())
         version_path = os.path.join(UPSTREAM_DIR, VERSION_MANIFEST_DIR, f"{entry.sane_version()}.json")
         profile_path = os.path.join(UPSTREAM_DIR, INSTALLER_MANIFEST_DIR, f"{entry.sane_version()}.json")
-
+        
         installer_refresh_required = not os.path.isfile(profile_path)
 
-        if installer_refresh_required:
-            # grab the installer if it's not there
-            if not os.path.isfile(jar_path):
-                if entry.mc_version == "1.20.1":
-                    rfile = sess.get("https://maven.neoforged.net/api/maven/details/releases/net/neoforged/forge/"
-                                     + entry.version, stream=True)
-                    if "files" not in rfile.json():
-                        eprint(f"Skipping {entry.sane_version()} with no valid files")
-                        entries.remove(entry)
-                        continue
+        # grab the installer if it's not there (always needed for size/hash)
+        if not os.path.isfile(jar_path):
+            if entry.mc_version == "1.20.1":
+                rfile = sess.get("https://maven.neoforged.net/api/maven/details/releases/net/neoforged/forge/"
+                                 + entry.version, stream=True)
+                if "files" not in rfile.json():
+                    eprint(f"Skipping {entry.sane_version()} with no valid files")
+                    entries.remove(entry)
+                    continue
 
-                eprint(f"Downloading {entry.installer_url()}")
-                installer_file = sess.get(entry.installer_url(), stream=True)
-                installer_file.raise_for_status()
-                with open(jar_path, 'wb') as f:
-                    for chunk in installer_file.iter_content(chunk_size=128):
-                        f.write(chunk)
+            eprint(f"Downloading {entry.installer_url()}")
+            installer_file = sess.get(entry.installer_url(), stream=True)
+            installer_file.raise_for_status()
+            with open(jar_path, 'wb') as f:
+                for chunk in installer_file.iter_content(chunk_size=128):
+                    f.write(chunk)
 
         entry.installer_size = os.path.getsize(jar_path)
 
