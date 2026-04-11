@@ -1,4 +1,119 @@
 [
+    {
+    "_comment": "Add windows-arm64 support for LWJGL 3.3.1-3.4.1",
+    "match": [
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.1",
+      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.1",
+      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.1",
+      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.1",
+      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.1",
+      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.1",
+      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.1",
+      "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-shaderc-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-spvc-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-vma-natives-windows-arm64:3.4.1"
+    ],
+    "override": {
+      "rules": [
+        {
+          "action": "allow",
+          "os": {
+            "name": "windows-arm64"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_comment": "Add osx-arm64 support for LWJGL 3.3.1-3.4.1",
+    "match": [
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.1",
+      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.1",
+      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.1",
+      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.1",
+      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.1",
+      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.1",
+      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.1",
+      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-vulkan-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-shaderc-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-spvc-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-vma-natives-macos-arm64:3.4.1"
+    ],
+    "override": {
+      "rules": [
+        {
+          "action": "allow",
+          "os": {
+            "name": "osx-arm64"
+          }
+        }
+      ]
+    }
+  },
   {
     "_comment": "Add missing tinyfd to the broken LWJGL 3.2.2 variant",
     "match": [
@@ -587,9 +702,9 @@
           },
           "classifiers": {
             "natives-linux-arm64": {
-              "sha1": "19c7d57e1ab7fee54f35a8615babd5defc355d78",
-              "size": 156163,
-              "url": "https://github.com/theofficialgman/lwjgl3-binaries-arm64/raw/lwjgl-3.2.2/lwjgl-jemalloc-natives-linux-arm64.jar"
+              "sha1": "762d7d80c9cdf3a3f3fc80c8a5f86612255edfe0",
+              "size": 156343,
+              "url": "https://github.com/theofficialgman/lwjgl3-binaries-arm64/raw/lwjgl-3.2.2/lwjgl-jemalloc-patched-natives-linux-arm64.jar"
             }
           }
         },
@@ -1571,28 +1686,6 @@
     ]
   },
   {
-    "_comment": "Only allow osx-arm64 for existing LWJGL 3.3.1",
-    "match": [
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.1",
-      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.1",
-      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.1",
-      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.1",
-      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.1",
-      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.1",
-      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.1"
-    ],
-    "override": {
-      "rules": [
-        {
-          "action": "allow",
-          "os": {
-            "name": "osx-arm64"
-          }
-        }
-      ]
-    }
-  },
-  {
     "_comment": "Only allow osx-arm64 for existing java-objc-bridge:1.1",
     "match": [
       "ca.weblite:java-objc-bridge:1.1"
@@ -1603,44 +1696,6 @@
           "action": "allow",
           "os": {
             "name": "osx-arm64"
-          }
-        }
-      ]
-    }
-  },
-  {
-    "_comment": "Only allow windows-arm64 for existing LWJGL 3.3.3, 3.3.6, and 3.4.1",
-    "match": [
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.3",
-      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.3",
-      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.3",
-      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.3",
-      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.3",
-      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.3",
-      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.3",
-      "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-natives-windows-arm64:3.4.1"
-    ],
-    "override": {
-      "rules": [
-        {
-          "action": "allow",
-          "os": {
-            "name": "windows-arm64"
           }
         }
       ]
@@ -1681,9 +1736,9 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "c6606e57db075ad218a2e78d2416c159a53b6a0c",
-            "size": 157996,
-            "url": "https://build.lwjgl.org/release/3.3.1/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm64.jar"
+            "sha1": "749be48a9b86ee2c3a2da5fd77511208adcfb33b",
+            "size": 159993,
+            "url": "https://github.com/theofficialgman/lwjgl3-binaries-arm64/raw/lwjgl-3.3.1/lwjgl-jemalloc-patched-natives-linux-arm64.jar"
           }
         },
         "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.1-lwjgl.1",
@@ -2024,53 +2079,6 @@
         }
       },
       "name": "org.lwjgl:lwjgl-glfw-natives-linux:3.3.2-lwjgl.1"
-    }
-  },
-  {
-    "_comment": "Add osx-arm64 support for LWJGL 3.3.2, 3.3.3, 3.3.6, and 3.4.1",
-    "match": [
-      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-natives-macos-arm64:3.4.1"
-    ],
-    "override": {
-      "rules": [
-        {
-          "action": "allow",
-          "os": {
-            "name": "osx-arm64"
-          }
-        }
-      ]
     }
   }
 ]
