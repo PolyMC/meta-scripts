@@ -621,5 +621,39 @@
         }
       ]
     }
+  },
+  {
+    "_comment": "Add linux-riscv64 support for LWJGL 3.3.6-3.4.1",
+    "match": [
+      "org.lwjgl:lwjgl-freetype-natives-linux-riscv64:3.3.6",
+      "org.lwjgl:lwjgl-glfw-natives-linux-riscv64:3.3.6",
+      "org.lwjgl:lwjgl-jemalloc-natives-linux-riscv64:3.3.6",
+      "org.lwjgl:lwjgl-openal-natives-linux-riscv64:3.3.6",
+      "org.lwjgl:lwjgl-opengl-natives-linux-riscv64:3.3.6",
+      "org.lwjgl:lwjgl-stb-natives-linux-riscv64:3.3.6",
+      "org.lwjgl:lwjgl-tinyfd-natives-linux-riscv64:3.3.6",
+      "org.lwjgl:lwjgl-natives-linux-riscv64:3.3.6",
+      "org.lwjgl:lwjgl-freetype-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-glfw-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-jemalloc-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-openal-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-opengl-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-stb-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-tinyfd-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-shaderc-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-spvc-natives-linux-riscv64:3.4.1",
+      "org.lwjgl:lwjgl-vma-natives-linux-riscv64:3.4.1"
+    ],
+    "override": {
+      "rules": [
+        {
+          "action": "allow",
+          "os": {
+            "name": "linux-riscv64"
+          }
+        }
+      ]
+    }
   }
 ]
