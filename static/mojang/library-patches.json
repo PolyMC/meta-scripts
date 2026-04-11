@@ -708,7 +708,7 @@
             }
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc:3.2.2-gman64.1",
+        "name": "org.lwjgl:lwjgl-jemalloc:3.2.2-gman64.2",
         "natives": {
           "linux-arm64": "natives-linux-arm64"
         },
@@ -1741,7 +1741,7 @@
             "url": "https://github.com/theofficialgman/lwjgl3-binaries-arm64/raw/lwjgl-3.3.1/lwjgl-jemalloc-patched-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.1-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.1-gman64.1",
         "rules": [
           {
             "action": "allow",
