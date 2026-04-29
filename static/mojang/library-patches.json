@@ -3757,5 +3757,380 @@
         ]
       }
     ]
+  },
+  {
+    "_comment": "Add freebsd support for LWJGL 3.3.6",
+    "match": [
+      "org.lwjgl:lwjgl-freetype:3.3.6",
+      "org.lwjgl:lwjgl-glfw:3.3.6",
+      "org.lwjgl:lwjgl-jemalloc:3.3.6",
+      "org.lwjgl:lwjgl-openal:3.3.6",
+      "org.lwjgl:lwjgl-opengl:3.3.6",
+      "org.lwjgl:lwjgl-stb:3.3.6",
+      "org.lwjgl:lwjgl-tinyfd:3.3.6",
+      "org.lwjgl:lwjgl:3.3.6"
+    ],
+    "additionalLibraries": [
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "032b689289d64d0a6c01bdd63fbd878204b16c69",
+            "size": 1162953,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-freetype/lwjgl-freetype-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-freetype-natives-freebsd:3.3.6-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "9f667a3390e801ca45eaa62579eee475b9ad5c6e",
+            "size": 104962,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-freebsd:3.3.6-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "55e44d237cd730ab3d910339d0142c9f4b57c5ff",
+            "size": 152529,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-freebsd:3.3.6-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "74bd44bc1309b1bdc73da1ab97f3e9e0c5ae605e",
+            "size": 661495,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-openal/lwjgl-openal-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-openal-natives-freebsd:3.3.6-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "87ffcb4d7b1722f4ea49bcfb49783bbdea015fec",
+            "size": 81028,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-opengl/lwjgl-opengl-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-opengl-natives-freebsd:3.3.6-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "0160eb66decce0f083fc618f0ab8cde9809df8d1",
+            "size": 226234,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-stb/lwjgl-stb-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-stb-natives-freebsd:3.3.6-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "96bf88a4a46b59b483fbea1a5617a65ba4d131be",
+            "size": 40103,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-tinyfd/lwjgl-tinyfd-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-tinyfd-natives-freebsd:3.3.6-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "a3472c39a6bfffa6c5a7cc1a41d72925fedfa739",
+            "size": 98722,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl/lwjgl-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-natives-freebsd:3.3.6-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_comment": "Add freebsd support for LWJGL 3.4.1",
+    "match": [
+      "org.lwjgl:lwjgl-freetype:3.4.1",
+      "org.lwjgl:lwjgl-glfw:3.4.1",
+      "org.lwjgl:lwjgl-jemalloc:3.4.1",
+      "org.lwjgl:lwjgl-openal:3.4.1",
+      "org.lwjgl:lwjgl-opengl:3.4.1",
+      "org.lwjgl:lwjgl-stb:3.4.1",
+      "org.lwjgl:lwjgl-tinyfd:3.4.1",
+      "org.lwjgl:lwjgl:3.4.1",
+      "org.lwjgl:lwjgl-shaderc:3.4.1",
+      "org.lwjgl:lwjgl-spvc:3.4.1",
+      "org.lwjgl:lwjgl-vma:3.4.1"
+    ],
+    "additionalLibraries": [
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "d7e622ab389bb8549617b0b20db5824b7b2e262b",
+            "size": 1217256,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-freetype/lwjgl-freetype-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-freetype-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "c367840595bdaa6f84830138c8b5cf59618b60fa",
+            "size": 106220,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "a9565df163061a20bd3062dd7eb240d019e748b2",
+            "size": 159419,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "c28d721b930590df368c9503fd84f06e4a3211f5",
+            "size": 830092,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-openal/lwjgl-openal-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-openal-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "fdde3b33c1fb4c9329da9e741fa894266baef71f",
+            "size": 81739,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-opengl/lwjgl-opengl-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-opengl-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "299c873b02718f5a11bc31279189d434a7279c15",
+            "size": 224821,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-stb/lwjgl-stb-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-stb-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "c7cabb0cf65ab1025667335bf4e4df3af9ef4e01",
+            "size": 40471,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-tinyfd/lwjgl-tinyfd-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-tinyfd-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "0b1c18e52be76ce4e0a05e323e01060406887351",
+            "size": 102712,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl/lwjgl-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "872460f4b007ed3a13a2d311e90bda5370406fc8",
+            "size": 2953522,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-shaderc/lwjgl-shaderc-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-shaderc-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "7a3d0e4a74f022b3196ecd33d9ebffafec7767f4",
+            "size": 1094646,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-spvc/lwjgl-spvc-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-spvc-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "85851480bef99188bf9a84b36cbe862cb4a52016",
+            "size": 62862,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-vma/lwjgl-vma-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-vma-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      }
+    ]
   }
 ]
