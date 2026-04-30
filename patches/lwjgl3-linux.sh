@@ -6,7 +6,7 @@
 . ./common.sh
 
 versions="3.3.1 3.3.2 3.3.3 3.3.6 3.4.1"
-platforms="linux-arm64 linux-arm32 linux-riscv64"
+platforms="linux-arm64 linux-arm32 linux-riscv64 freebsd"
 
 # TODO(crueter): See if these need to be made separate.
 libraries() {
@@ -47,10 +47,10 @@ matches() {
 
 for platform in $platforms; do
 	for version in $versions; do
-		# linux-riscv64 only has builds available on 3.3.6+
+		# linux-riscv64 and freebsd only have builds available on 3.3.6+
 		# Maybe someone wants to provide their own? :)
 		echo "$platform: $version" >&2
-		if [ "$platform" = "linux-riscv64" ] && ! version_gte "$version" "3.3.6"; then
+		if { [ "$platform" = "linux-riscv64" ] || [ "$platform" = "freebsd" ]; } && ! version_gte "$version" "3.3.6"; then
 			continue
 		fi
 		matches "$platform" "$version"
