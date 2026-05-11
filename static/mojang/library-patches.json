@@ -3764,7 +3764,6 @@
       "org.lwjgl:lwjgl-freetype:3.3.6",
       "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-jemalloc:3.3.6",
-      "org.lwjgl:lwjgl-openal:3.3.6",
       "org.lwjgl:lwjgl-opengl:3.3.6",
       "org.lwjgl:lwjgl-stb:3.3.6",
       "org.lwjgl:lwjgl-tinyfd:3.3.6",
@@ -3816,24 +3815,6 @@
           }
         },
         "name": "org.lwjgl:lwjgl-jemalloc-natives-freebsd:3.3.6-lwjgl.1",
-        "rules": [
-          {
-            "action": "allow",
-            "os": {
-              "name": "freebsd"
-            }
-          }
-        ]
-      },
-      {
-        "downloads": {
-          "artifact": {
-            "sha1": "74bd44bc1309b1bdc73da1ab97f3e9e0c5ae605e",
-            "size": 661495,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-openal/lwjgl-openal-natives-freebsd.jar"
-          }
-        },
-        "name": "org.lwjgl:lwjgl-openal-natives-freebsd:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3923,7 +3904,6 @@
       "org.lwjgl:lwjgl-freetype:3.4.1",
       "org.lwjgl:lwjgl-glfw:3.4.1",
       "org.lwjgl:lwjgl-jemalloc:3.4.1",
-      "org.lwjgl:lwjgl-openal:3.4.1",
       "org.lwjgl:lwjgl-opengl:3.4.1",
       "org.lwjgl:lwjgl-stb:3.4.1",
       "org.lwjgl:lwjgl-tinyfd:3.4.1",
@@ -3978,24 +3958,6 @@
           }
         },
         "name": "org.lwjgl:lwjgl-jemalloc-natives-freebsd:3.4.1-lwjgl.1",
-        "rules": [
-          {
-            "action": "allow",
-            "os": {
-              "name": "freebsd"
-            }
-          }
-        ]
-      },
-      {
-        "downloads": {
-          "artifact": {
-            "sha1": "c28d721b930590df368c9503fd84f06e4a3211f5",
-            "size": 830092,
-            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-openal/lwjgl-openal-natives-freebsd.jar"
-          }
-        },
-        "name": "org.lwjgl:lwjgl-openal-natives-freebsd:3.4.1-lwjgl.1",
         "rules": [
           {
             "action": "allow",
