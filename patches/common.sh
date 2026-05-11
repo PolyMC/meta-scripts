@@ -17,7 +17,13 @@ libs() {
 	platform="$1"
 	version="$2"
 
-	_match="lwjgl-glfw lwjgl-jemalloc lwjgl-openal lwjgl-opengl lwjgl-stb lwjgl-tinyfd lwjgl"
+	_match="lwjgl-glfw lwjgl-jemalloc"
+
+	if [ "$platform" != freebsd ]; then
+		_match="$_match lwjgl-openal"
+	fi
+
+	_match="$_match lwjgl-opengl lwjgl-stb lwjgl-tinyfd lwjgl"
 
 	# freetype
 	if version_gte "$version" "3.3.2"; then
