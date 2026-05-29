@@ -64,6 +64,11 @@ match() {
 		for lib in $(libs "$platform" "$version"); do
 			echo "org.lwjgl:$lib:$version"
 		done
+
+		# mojang added an unsafe variant for some reason
+		if [ "$version" = "3.4.1" ]; then
+			echo "org.lwjgl:lwjgl:$version:unsafe"
+		fi
 	done | jq -Rn '[inputs]'
 }
 
@@ -82,7 +87,24 @@ artifact() {
 	url="$1"
 
 	tmp=$(mktemp)
-	curl -sL "$url" -o "$tmp" --fail
+
+	TRIES=0
+	while [ "$TRIES" -lt 10 ]; do
+		if ! curl -sSL "$url" -o "$tmp" --fail; then
+			echo "-- Warning: $url failed to download, trying again in 2s" >&2
+			sleep 2
+			TRIES=$((TRIES+1))
+		else
+			break
+		fi
+	done
+
+	if [ "$TRIES" -eq 10 ]; then
+		echo "-- $url failed to download after 10 tries" >&2
+		[ ! -f "$tmp" ] || rm -f "$tmp"
+		exit 1
+	fi
+
 	sha1=$(sha1sum "$tmp" | awk '{print $1}')
 	size=$(stat -c %s "$tmp")
 

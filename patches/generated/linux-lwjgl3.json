@@ -629,7 +629,8 @@
       "org.lwjgl:lwjgl:3.4.1",
       "org.lwjgl:lwjgl-shaderc:3.4.1",
       "org.lwjgl:lwjgl-spvc:3.4.1",
-      "org.lwjgl:lwjgl-vma:3.4.1"
+      "org.lwjgl:lwjgl-vma:3.4.1",
+      "org.lwjgl:lwjgl:3.4.1:unsafe"
     ],
     "additionalLibraries": [
       {
@@ -1462,7 +1463,8 @@
       "org.lwjgl:lwjgl:3.4.1",
       "org.lwjgl:lwjgl-shaderc:3.4.1",
       "org.lwjgl:lwjgl-spvc:3.4.1",
-      "org.lwjgl:lwjgl-vma:3.4.1"
+      "org.lwjgl:lwjgl-vma:3.4.1",
+      "org.lwjgl:lwjgl:3.4.1:unsafe"
     ],
     "additionalLibraries": [
       {
@@ -1837,7 +1839,8 @@
       "org.lwjgl:lwjgl:3.4.1",
       "org.lwjgl:lwjgl-shaderc:3.4.1",
       "org.lwjgl:lwjgl-spvc:3.4.1",
-      "org.lwjgl:lwjgl-vma:3.4.1"
+      "org.lwjgl:lwjgl-vma:3.4.1",
+      "org.lwjgl:lwjgl:3.4.1:unsafe"
     ],
     "additionalLibraries": [
       {
@@ -2192,7 +2195,8 @@
       "org.lwjgl:lwjgl:3.4.1",
       "org.lwjgl:lwjgl-shaderc:3.4.1",
       "org.lwjgl:lwjgl-spvc:3.4.1",
-      "org.lwjgl:lwjgl-vma:3.4.1"
+      "org.lwjgl:lwjgl-vma:3.4.1",
+      "org.lwjgl:lwjgl:3.4.1:unsafe"
     ],
     "additionalLibraries": [
       {
