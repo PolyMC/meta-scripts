@@ -51,12 +51,12 @@ def version_from_installer(installer: MojangVersion, profile: NeoForgeInstallerP
 
     v.libraries = []
 
-    wrapper_lib = Library(name=GradleSpecifier("io.github.zekerzhayard", "ForgeWrapper", "1.6.0"))
+    wrapper_lib = Library(name=GradleSpecifier("io.github.zekerzhayard", "ForgeWrapper", "mmc7"))
     wrapper_lib.downloads = MojangLibraryDownloads()
     wrapper_lib.downloads.artifact = MojangArtifact(
-        url="https://github.com/ZekerZhayard/ForgeWrapper/releases/download/1.6.0/ForgeWrapper-1.6.0.jar",
-        sha1="035a51fe6439792a61507630d89382f621da0f1f",
-        size=28679
+        url="https://github.com/MultiMC/ForgeWrapper/releases/download/mmc7/ForgeWrapper-mmc7.jar",
+        sha1="0c99747406998c933be78a368dfd8386949d1935",
+        size=29346
     )
     v.libraries.append(wrapper_lib)
 
