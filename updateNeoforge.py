@@ -35,12 +35,16 @@ def eprint(*args, **kwargs):
 
 def map_minecraft_ver_to_neo_forge_ver(neo_forge_version_list: list[str]) -> dict[str, list[str]]:
     def mc_ver(x: str) -> str:
-        parts = x.split(".")[:2]
+        parts = x.split(".")
         major = int(parts[0])
+        # strip non-numeric suffixes (e.g. "-beta", "-rc1")
+        parts = [p.split("-")[0] for p in parts]
         if major >= 26:
-            return ".".join(p for p in parts if p != "0")
-        return "1." + ".".join(p for p in parts if p != "0")
-    return {k: list(v) for k, v in itertools.groupby(neo_forge_version_list, mc_ver)}
+            return ".".join(p for p in parts[:3] if p != "0")
+        return "1." + ".".join(p for p in parts[:2] if p != "0")
+    # sort by mc_ver key so groupby works correctly even if API returns non-contiguous
+    sorted_versions = sorted(neo_forge_version_list, key=mc_ver)
+    return {k: list(v) for k, v in itertools.groupby(sorted_versions, mc_ver)}
 
 def main():
     # cache prev index
