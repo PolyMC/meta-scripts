@@ -40,6 +40,9 @@ LEGACYINFO_PATH = os.path.join(STATIC_DIR, STATIC_LEGACYINFO_FILE)
 forever_cache = FileCache('caches/http_cache', forever=True)
 sess = CacheControl(requests.Session(), forever_cache)
 
+INVALID_TZ_OFFSET_PATTERN = re.compile(
+    rb'([T ][0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]+)?)([+-])([0-9]):([0-9]{2})')
+
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
@@ -51,6 +54,13 @@ def filehash(filename, hashtype, blocksize=65536):
         for block in iter(lambda: f.read(blocksize), b""):
             hashtype.update(block)
     return hashtype.hexdigest()
+
+
+def normalize_single_digit_timezone_offsets(json_data: bytes) -> bytes:
+    # Some Forge manifests contain invalid offsets like +0:00; normalize to +00:00.
+    return INVALID_TZ_OFFSET_PATTERN.sub(
+        lambda match: match.group(1) + match.group(2) + b'0' + match.group(3) + b':' + match.group(4),
+        json_data)
 
 
 def get_single_forge_files_manifest(longversion):
@@ -275,6 +285,7 @@ def main():
                     with suppress(KeyError):
                         with jar.open('version.json') as profile_zip_entry:
                             version_data = profile_zip_entry.read()
+                            version_data = normalize_single_digit_timezone_offsets(version_data)
 
                             # Process: does it parse?
                             MojangVersion.parse_raw(version_data)
@@ -285,6 +296,7 @@ def main():
 
                     with jar.open('install_profile.json') as profile_zip_entry:
                         install_profile_data = profile_zip_entry.read()
+                        install_profile_data = normalize_single_digit_timezone_offsets(install_profile_data)
 
                         # Process: does it parse?
                         is_parsable = False
