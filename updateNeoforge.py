@@ -110,7 +110,7 @@ def main():
             installer_file = sess.get(entry.installer_url(), stream=True)
             installer_file.raise_for_status()
             with open(jar_path, 'wb') as f:
-                for chunk in installer_file.iter_content(chunk_size=128):
+                for chunk in installer_file.iter_content(chunk_size=8192):
                     f.write(chunk)
 
         if not os.path.isfile(jar_path):

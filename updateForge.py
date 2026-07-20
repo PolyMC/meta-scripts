@@ -274,7 +274,7 @@ def main():
                     rfile = sess.get(version.url(), stream=True)
                     rfile.raise_for_status()
                     with open(jar_path, 'wb') as f:
-                        for chunk in rfile.iter_content(chunk_size=128):
+                        for chunk in rfile.iter_content(chunk_size=8192):
                             f.write(chunk)
 
             eprint("Processing %s" % version.url())
@@ -343,7 +343,7 @@ def main():
                     rfile = sess.get(version.url(), stream=True)
                     rfile.raise_for_status()
                     with open(jar_path, 'wb') as f:
-                        for chunk in rfile.iter_content(chunk_size=128):
+                        for chunk in rfile.iter_content(chunk_size=8192):
                             f.write(chunk)
                 # find the latest timestamp in the zip file
                 tstamp = datetime.fromtimestamp(0)
