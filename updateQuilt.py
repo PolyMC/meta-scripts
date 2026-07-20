@@ -1,6 +1,7 @@
 from meta.common.json import dump, dumps, load, loads
 import os
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
 import requests
@@ -19,7 +20,11 @@ ensure_upstream_dir(INSTALLER_INFO_DIR)
 ensure_upstream_dir(META_DIR)
 
 forever_cache = FileCache('caches/http_cache', forever=True)
-sess = CacheControl(requests.Session(), forever_cache)
+
+
+# each thread worker has its own session
+def make_session():
+    return CacheControl(requests.Session(), forever_cache)
 
 
 def filehash(filename, hashtype, blocksize=65536):
@@ -37,7 +42,7 @@ def get_maven_url(maven_key, server, ext):
     return maven_url
 
 
-def get_json_file(path, url):
+def get_json_file(path, url, sess):
     with open(path, 'w', encoding='utf-8') as f:
         r = sess.get(url)
         r.raise_for_status()
@@ -47,13 +52,13 @@ def get_json_file(path, url):
         return version_json
 
 
-def head_file(url):
+def head_file(url, sess):
     r = sess.head(url)
     r.raise_for_status()
     return r.headers
 
 
-def get_binary_file(path, url):
+def get_binary_file(path, url, sess):
     with open(path, 'wb') as f:
         r = sess.get(url)
         r.raise_for_status()
@@ -61,19 +66,19 @@ def get_binary_file(path, url):
             f.write(chunk)
 
 
-def compute_jar_file(path, url):
+def compute_jar_file(path, url, sess):
     # These two approaches should result in the same metadata, except for the timestamp which might be a few minutes
     # off for the fallback method
     try:
         # Let's not download a Jar file if we don't need to.
-        headers = head_file(url)
+        headers = head_file(url, sess)
         tstamp = datetime.strptime(headers["Last-Modified"], DATETIME_FORMAT_HTTP)
     except requests.HTTPError:
         # Just in case something changes in the future
         print(f"Falling back to downloading jar for {url}")
 
         jar_path = path + ".jar"
-        get_binary_file(jar_path, url)
+        get_binary_file(jar_path, url, sess)
         tstamp = datetime.fromtimestamp(0)
         with zipfile.ZipFile(jar_path) as jar:
             allinfo = jar.infolist()
@@ -86,6 +91,18 @@ def compute_jar_file(path, url):
     data.write(path + ".json")
 
 
+def process_version(it, component, sess):
+    print(f"Processing {component} {it['version']}")
+    jar_maven_url = get_maven_url(it["maven"], "https://maven.quiltmc.org/repository/release/", ".jar")
+    compute_jar_file(os.path.join(UPSTREAM_DIR, JARS_DIR, transform_maven_key(it["maven"])), jar_maven_url, sess)
+
+
+def process_loader(it, sess):
+    print(f"Downloading JAR info for loader {it['version']}")
+    maven_url = get_maven_url(it["maven"], "https://maven.quiltmc.org/repository/release/", ".json")
+    get_json_file(os.path.join(UPSTREAM_DIR, INSTALLER_INFO_DIR, f"{it['version']}.json"), maven_url, sess)
+
+
 def main():
     # get the version list for each component we are interested in
     components = ["loader"]
@@ -93,32 +110,37 @@ def main():
         components.append("hashed")
     for component in components:
         index = get_json_file(os.path.join(UPSTREAM_DIR, META_DIR, f"{component}.json"),
-                              "https://meta.quiltmc.org/v3/versions/" + component)
+                              "https://meta.quiltmc.org/v3/versions/" + component, make_session())
 
-        def filter_index():
+        with ThreadPoolExecutor(max_workers=16) as executor:
+            futures = []
             for it in index:
-                print(f"Processing {component} {it['version']} ")
-                jar_maven_url = get_maven_url(it["maven"], "https://maven.quiltmc.org/repository/release/", ".jar")
+                futures.append(executor.submit(process_version, it, component, make_session()))
+
+            filtered_index = []
+            for i, future in enumerate(futures):
                 try:
-                    compute_jar_file(os.path.join(UPSTREAM_DIR, JARS_DIR, transform_maven_key(it["maven"])), jar_maven_url)
+                    future.result()
+                    filtered_index.append(index[i])
                 except requests.HTTPError:
                     continue
-                yield it
 
-        index = list(filter_index())
-
-        dump(index, open(os.path.join(UPSTREAM_DIR, META_DIR, f"{component}.json"), "w"), sort_keys=True, indent=4)
+        dump(filtered_index, open(os.path.join(UPSTREAM_DIR, META_DIR, f"{component}.json"), "w"), sort_keys=True, indent=4)
 
     # for each loader, download installer JSON file from maven
     with open(os.path.join(UPSTREAM_DIR, META_DIR, "loader.json"), 'r', encoding='utf-8') as loaderVersionIndexFile:
         loader_version_index = load(loaderVersionIndexFile)
-        for it in loader_version_index:
-            print(f"Downloading JAR info for loader {it['version']} ")
-            maven_url = get_maven_url(it["maven"], "https://maven.quiltmc.org/repository/release/", ".json")
-            try:
-                get_json_file(os.path.join(UPSTREAM_DIR, INSTALLER_INFO_DIR, f"{it['version']}.json"), maven_url)
-            except requests.HTTPError:
-                pass
+
+        with ThreadPoolExecutor(max_workers=16) as executor:
+            futures = []
+            for it in loader_version_index:
+                # preserve ordering
+                futures.append(executor.submit(process_loader, it, make_session()))
+            for future in futures:
+                try:
+                    future.result()
+                except requests.HTTPError:
+                    pass
 
 
 if __name__ == '__main__':
