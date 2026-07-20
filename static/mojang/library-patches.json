@@ -2,39 +2,38 @@
   {
     "_comment": "Add windows-arm64 support for LWJGL 3.3.1-3.4.1",
     "match": [
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.1",
       "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.1",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.1",
       "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.1",
       "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.1",
       "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.1",
       "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.1",
       "org.lwjgl:lwjgl-natives-windows-arm64:3.3.1",
       "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.3.2",
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.2",
       "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.2",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.2",
       "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.2",
       "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.2",
       "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.2",
       "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.2",
       "org.lwjgl:lwjgl-natives-windows-arm64:3.3.2",
       "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.3.3",
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.3",
       "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.3",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.3",
       "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.3",
       "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.3",
       "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.3",
       "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.3",
       "org.lwjgl:lwjgl-natives-windows-arm64:3.3.3",
       "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.3.6",
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.6",
       "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.3.6",
+      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.3.6",
       "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.3.6",
       "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.3.6",
       "org.lwjgl:lwjgl-stb-natives-windows-arm64:3.3.6",
       "org.lwjgl:lwjgl-tinyfd-natives-windows-arm64:3.3.6",
       "org.lwjgl:lwjgl-natives-windows-arm64:3.3.6",
       "org.lwjgl:lwjgl-freetype-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.4.1",
       "org.lwjgl:lwjgl-jemalloc-natives-windows-arm64:3.4.1",
       "org.lwjgl:lwjgl-openal-natives-windows-arm64:3.4.1",
       "org.lwjgl:lwjgl-opengl-natives-windows-arm64:3.4.1",
@@ -43,7 +42,8 @@
       "org.lwjgl:lwjgl-natives-windows-arm64:3.4.1",
       "org.lwjgl:lwjgl-shaderc-natives-windows-arm64:3.4.1",
       "org.lwjgl:lwjgl-spvc-natives-windows-arm64:3.4.1",
-      "org.lwjgl:lwjgl-vma-natives-windows-arm64:3.4.1"
+      "org.lwjgl:lwjgl-vma-natives-windows-arm64:3.4.1",
+      "org.lwjgl:lwjgl-sdl-natives-windows-arm64:3.4.1"
     ],
     "override": {
       "rules": [
@@ -59,39 +59,38 @@
   {
     "_comment": "Add osx-arm64 support for LWJGL 3.3.1-3.4.1",
     "match": [
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.1",
       "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.1",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.1",
       "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.1",
       "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.1",
       "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.1",
       "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.1",
       "org.lwjgl:lwjgl-natives-macos-arm64:3.3.1",
       "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.2",
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.2",
       "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.2",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.2",
       "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.2",
       "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.2",
       "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.2",
       "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.2",
       "org.lwjgl:lwjgl-natives-macos-arm64:3.3.2",
       "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.3",
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.3",
       "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.3",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.3",
       "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.3",
       "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.3",
       "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.3",
       "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.3",
       "org.lwjgl:lwjgl-natives-macos-arm64:3.3.3",
       "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.3.6",
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.6",
       "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.3.6",
+      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.3.6",
       "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.3.6",
       "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.3.6",
       "org.lwjgl:lwjgl-stb-natives-macos-arm64:3.3.6",
       "org.lwjgl:lwjgl-tinyfd-natives-macos-arm64:3.3.6",
       "org.lwjgl:lwjgl-natives-macos-arm64:3.3.6",
       "org.lwjgl:lwjgl-freetype-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.4.1",
       "org.lwjgl:lwjgl-jemalloc-natives-macos-arm64:3.4.1",
       "org.lwjgl:lwjgl-openal-natives-macos-arm64:3.4.1",
       "org.lwjgl:lwjgl-opengl-natives-macos-arm64:3.4.1",
@@ -101,7 +100,8 @@
       "org.lwjgl:lwjgl-shaderc-natives-macos-arm64:3.4.1",
       "org.lwjgl:lwjgl-spvc-natives-macos-arm64:3.4.1",
       "org.lwjgl:lwjgl-vma-natives-macos-arm64:3.4.1",
-      "org.lwjgl:lwjgl-vulkan-natives-macos-arm64:3.4.1"
+      "org.lwjgl:lwjgl-vulkan-natives-macos-arm64:3.4.1",
+      "org.lwjgl:lwjgl-sdl-natives-macos-arm64:3.4.1"
     ],
     "override": {
       "rules": [
@@ -1720,8 +1720,8 @@
   {
     "_comment": "Add linux-arm64 support for LWJGL 3.3.1",
     "match": [
-      "org.lwjgl:lwjgl-glfw:3.3.1",
       "org.lwjgl:lwjgl-jemalloc:3.3.1",
+      "org.lwjgl:lwjgl-glfw:3.3.1",
       "org.lwjgl:lwjgl-openal:3.3.1",
       "org.lwjgl:lwjgl-opengl:3.3.1",
       "org.lwjgl:lwjgl-stb:3.3.1",
@@ -1732,12 +1732,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "513eb39b866d0fe131a18d5c517087805433b029",
-            "size": 112350,
-            "url": "https://build.lwjgl.org/release/3.3.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
+            "sha1": "749be48a9b86ee2c3a2da5fd77511208adcfb33b",
+            "size": 159993,
+            "url": "https://github.com/theofficialgman/lwjgl3-binaries-arm64/raw/lwjgl-3.3.1/lwjgl-jemalloc-patched-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.3.1-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.1-gman64.3",
         "rules": [
           {
             "action": "allow",
@@ -1750,12 +1750,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "749be48a9b86ee2c3a2da5fd77511208adcfb33b",
-            "size": 159993,
-            "url": "https://github.com/theofficialgman/lwjgl3-binaries-arm64/raw/lwjgl-3.3.1/lwjgl-jemalloc-patched-natives-linux-arm64.jar"
+            "sha1": "513eb39b866d0fe131a18d5c517087805433b029",
+            "size": 112350,
+            "url": "https://build.lwjgl.org/release/3.3.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.1-gman64.3",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.3.1-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -1861,8 +1861,8 @@
     "_comment": "Add linux-arm64 support for LWJGL 3.3.2",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.3.2",
-      "org.lwjgl:lwjgl-glfw:3.3.2",
       "org.lwjgl:lwjgl-jemalloc:3.3.2",
+      "org.lwjgl:lwjgl-glfw:3.3.2",
       "org.lwjgl:lwjgl-openal:3.3.2",
       "org.lwjgl:lwjgl-opengl:3.3.2",
       "org.lwjgl:lwjgl-stb:3.3.2",
@@ -1891,12 +1891,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "bc49e64bae0f7ff103a312ee8074a34c4eb034c7",
-            "size": 120168,
-            "url": "https://build.lwjgl.org/release/3.3.2/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
+            "sha1": "5249f18a9ae20ea86c5816bc3107a888ce7a17d2",
+            "size": 206402,
+            "url": "https://build.lwjgl.org/release/3.3.2/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.3.2-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.2-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -1909,12 +1909,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "5249f18a9ae20ea86c5816bc3107a888ce7a17d2",
-            "size": 206402,
-            "url": "https://build.lwjgl.org/release/3.3.2/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm64.jar"
+            "sha1": "bc49e64bae0f7ff103a312ee8074a34c4eb034c7",
+            "size": 120168,
+            "url": "https://build.lwjgl.org/release/3.3.2/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.2-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.3.2-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2020,8 +2020,8 @@
     "_comment": "Add linux-arm64 support for LWJGL 3.3.3",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.3.3",
-      "org.lwjgl:lwjgl-glfw:3.3.3",
       "org.lwjgl:lwjgl-jemalloc:3.3.3",
+      "org.lwjgl:lwjgl-glfw:3.3.3",
       "org.lwjgl:lwjgl-openal:3.3.3",
       "org.lwjgl:lwjgl-opengl:3.3.3",
       "org.lwjgl:lwjgl-stb:3.3.3",
@@ -2050,12 +2050,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "492a0f11f85b85899a6568f07511160c1b87cd38",
-            "size": 122159,
-            "url": "https://build.lwjgl.org/release/3.3.3/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
+            "sha1": "eff8b86798191192fe2cba2dc2776109f30c239d",
+            "size": 209315,
+            "url": "https://build.lwjgl.org/release/3.3.3/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.3.3-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.3-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2068,12 +2068,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "eff8b86798191192fe2cba2dc2776109f30c239d",
-            "size": 209315,
-            "url": "https://build.lwjgl.org/release/3.3.3/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm64.jar"
+            "sha1": "492a0f11f85b85899a6568f07511160c1b87cd38",
+            "size": 122159,
+            "url": "https://build.lwjgl.org/release/3.3.3/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.3-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.3.3-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2179,8 +2179,8 @@
     "_comment": "Add linux-arm64 support for LWJGL 3.3.6",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.3.6",
-      "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-jemalloc:3.3.6",
+      "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-openal:3.3.6",
       "org.lwjgl:lwjgl-opengl:3.3.6",
       "org.lwjgl:lwjgl-stb:3.3.6",
@@ -2209,12 +2209,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "b54023af492b4c2c72451f3a7aa0f385e9969474",
-            "size": 141056,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
+            "sha1": "1bc2e16e70df7f418d668c2984ac8066f1f6f5b1",
+            "size": 222196,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.3.6-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2227,12 +2227,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "1bc2e16e70df7f418d668c2984ac8066f1f6f5b1",
-            "size": 222196,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm64.jar"
+            "sha1": "b54023af492b4c2c72451f3a7aa0f385e9969474",
+            "size": 141056,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm64:3.3.6-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2338,7 +2338,6 @@
     "_comment": "Add linux-arm64 support for LWJGL 3.4.1",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.4.1",
-      "org.lwjgl:lwjgl-glfw:3.4.1",
       "org.lwjgl:lwjgl-jemalloc:3.4.1",
       "org.lwjgl:lwjgl-openal:3.4.1",
       "org.lwjgl:lwjgl-opengl:3.4.1",
@@ -2348,6 +2347,7 @@
       "org.lwjgl:lwjgl-shaderc:3.4.1",
       "org.lwjgl:lwjgl-spvc:3.4.1",
       "org.lwjgl:lwjgl-vma:3.4.1",
+      "org.lwjgl:lwjgl-sdl:3.4.1",
       "org.lwjgl:lwjgl:3.4.1:unsafe"
     ],
     "additionalLibraries": [
@@ -2360,24 +2360,6 @@
           }
         },
         "name": "org.lwjgl:lwjgl-freetype-natives-linux-arm64:3.4.1-lwjgl.1",
-        "rules": [
-          {
-            "action": "allow",
-            "os": {
-              "name": "linux-arm64"
-            }
-          }
-        ]
-      },
-      {
-        "downloads": {
-          "artifact": {
-            "sha1": "e5e87034c47118960746077dba46280e8de864b3",
-            "size": 141530,
-            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
-          }
-        },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.4.1-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2548,14 +2530,50 @@
             }
           }
         ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "b5a62eb82113b0227077fb270128487a80a20299",
+            "size": 1434288,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-sdl/lwjgl-sdl-natives-linux-arm64.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-sdl-natives-linux-arm64:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "linux-arm64"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "e5e87034c47118960746077dba46280e8de864b3",
+            "size": 141530,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm64.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm64:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "linux-arm64"
+            }
+          }
+        ]
       }
     ]
   },
   {
     "_comment": "Add linux-arm32 support for LWJGL 3.3.1",
     "match": [
-      "org.lwjgl:lwjgl-glfw:3.3.1",
       "org.lwjgl:lwjgl-jemalloc:3.3.1",
+      "org.lwjgl:lwjgl-glfw:3.3.1",
       "org.lwjgl:lwjgl-openal:3.3.1",
       "org.lwjgl:lwjgl-opengl:3.3.1",
       "org.lwjgl:lwjgl-stb:3.3.1",
@@ -2566,12 +2584,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "816d935933f2dd743074c4e717cc25b55720f294",
-            "size": 104027,
-            "url": "https://build.lwjgl.org/release/3.3.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
+            "sha1": "a96a6d6cb3876d7813fcee53c3c24f246aeba3b3",
+            "size": 136157,
+            "url": "https://build.lwjgl.org/release/3.3.1/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm32.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.3.1-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm32:3.3.1-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2584,12 +2602,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "a96a6d6cb3876d7813fcee53c3c24f246aeba3b3",
-            "size": 136157,
-            "url": "https://build.lwjgl.org/release/3.3.1/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm32.jar"
+            "sha1": "816d935933f2dd743074c4e717cc25b55720f294",
+            "size": 104027,
+            "url": "https://build.lwjgl.org/release/3.3.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm32:3.3.1-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.3.1-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2695,8 +2713,8 @@
     "_comment": "Add linux-arm32 support for LWJGL 3.3.2",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.3.2",
-      "org.lwjgl:lwjgl-glfw:3.3.2",
       "org.lwjgl:lwjgl-jemalloc:3.3.2",
+      "org.lwjgl:lwjgl-glfw:3.3.2",
       "org.lwjgl:lwjgl-openal:3.3.2",
       "org.lwjgl:lwjgl-opengl:3.3.2",
       "org.lwjgl:lwjgl-stb:3.3.2",
@@ -2725,12 +2743,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "5907d9a6b7c44fb0612a63bb1cff5992588f65be",
-            "size": 110067,
-            "url": "https://build.lwjgl.org/release/3.3.2/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
+            "sha1": "9367437ce192e4d6f5725d53d85520644c0b0d6f",
+            "size": 177571,
+            "url": "https://build.lwjgl.org/release/3.3.2/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm32.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.3.2-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm32:3.3.2-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2743,12 +2761,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "9367437ce192e4d6f5725d53d85520644c0b0d6f",
-            "size": 177571,
-            "url": "https://build.lwjgl.org/release/3.3.2/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm32.jar"
+            "sha1": "5907d9a6b7c44fb0612a63bb1cff5992588f65be",
+            "size": 110067,
+            "url": "https://build.lwjgl.org/release/3.3.2/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm32:3.3.2-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.3.2-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2854,8 +2872,8 @@
     "_comment": "Add linux-arm32 support for LWJGL 3.3.3",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.3.3",
-      "org.lwjgl:lwjgl-glfw:3.3.3",
       "org.lwjgl:lwjgl-jemalloc:3.3.3",
+      "org.lwjgl:lwjgl-glfw:3.3.3",
       "org.lwjgl:lwjgl-openal:3.3.3",
       "org.lwjgl:lwjgl-opengl:3.3.3",
       "org.lwjgl:lwjgl-stb:3.3.3",
@@ -2884,12 +2902,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "d9af485c32545b37dd5359b163161d42d7534dcf",
-            "size": 112560,
-            "url": "https://build.lwjgl.org/release/3.3.3/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
+            "sha1": "109b6931880d02d4e65ced38928a16e41d19873e",
+            "size": 178324,
+            "url": "https://build.lwjgl.org/release/3.3.3/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm32.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.3.3-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm32:3.3.3-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -2902,12 +2920,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "109b6931880d02d4e65ced38928a16e41d19873e",
-            "size": 178324,
-            "url": "https://build.lwjgl.org/release/3.3.3/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm32.jar"
+            "sha1": "d9af485c32545b37dd5359b163161d42d7534dcf",
+            "size": 112560,
+            "url": "https://build.lwjgl.org/release/3.3.3/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm32:3.3.3-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.3.3-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3013,8 +3031,8 @@
     "_comment": "Add linux-arm32 support for LWJGL 3.3.6",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.3.6",
-      "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-jemalloc:3.3.6",
+      "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-openal:3.3.6",
       "org.lwjgl:lwjgl-opengl:3.3.6",
       "org.lwjgl:lwjgl-stb:3.3.6",
@@ -3043,12 +3061,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "671adf04a6bc4f792af13892e37f804be30b7070",
-            "size": 118670,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
+            "sha1": "c484cae39a718010dbc7931fe5e12664600a13c2",
+            "size": 176503,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm32.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.3.6-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm32:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3061,12 +3079,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "c484cae39a718010dbc7931fe5e12664600a13c2",
-            "size": 176503,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-arm32.jar"
+            "sha1": "671adf04a6bc4f792af13892e37f804be30b7070",
+            "size": 118670,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-arm32:3.3.6-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3172,7 +3190,6 @@
     "_comment": "Add linux-arm32 support for LWJGL 3.4.1",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.4.1",
-      "org.lwjgl:lwjgl-glfw:3.4.1",
       "org.lwjgl:lwjgl-jemalloc:3.4.1",
       "org.lwjgl:lwjgl-openal:3.4.1",
       "org.lwjgl:lwjgl-opengl:3.4.1",
@@ -3182,6 +3199,7 @@
       "org.lwjgl:lwjgl-shaderc:3.4.1",
       "org.lwjgl:lwjgl-spvc:3.4.1",
       "org.lwjgl:lwjgl-vma:3.4.1",
+      "org.lwjgl:lwjgl-sdl:3.4.1",
       "org.lwjgl:lwjgl:3.4.1:unsafe"
     ],
     "additionalLibraries": [
@@ -3194,24 +3212,6 @@
           }
         },
         "name": "org.lwjgl:lwjgl-freetype-natives-linux-arm32:3.4.1-lwjgl.1",
-        "rules": [
-          {
-            "action": "allow",
-            "os": {
-              "name": "linux-arm32"
-            }
-          }
-        ]
-      },
-      {
-        "downloads": {
-          "artifact": {
-            "sha1": "bb243e9a857c4301bf7d5e668538686eaa64101e",
-            "size": 120373,
-            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
-          }
-        },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.4.1-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3382,6 +3382,42 @@
             }
           }
         ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "2aa4505272ea3c453f4c2a2266b6f24e03b49f68",
+            "size": 1165867,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-sdl/lwjgl-sdl-natives-linux-arm32.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-sdl-natives-linux-arm32:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "linux-arm32"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "bb243e9a857c4301bf7d5e668538686eaa64101e",
+            "size": 120373,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-arm32.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-arm32:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "linux-arm32"
+            }
+          }
+        ]
       }
     ]
   },
@@ -3389,8 +3425,8 @@
     "_comment": "Add linux-riscv64 support for LWJGL 3.3.6",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.3.6",
-      "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-jemalloc:3.3.6",
+      "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-openal:3.3.6",
       "org.lwjgl:lwjgl-opengl:3.3.6",
       "org.lwjgl:lwjgl-stb:3.3.6",
@@ -3419,12 +3455,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "dde300b71892fddae65e4c524760e650bc924bb2",
-            "size": 119447,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-riscv64.jar"
+            "sha1": "9c76514b7725d5b8c5731f41218e97dcad3237b9",
+            "size": 197210,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-riscv64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-riscv64:3.3.6-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-riscv64:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3437,12 +3473,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "9c76514b7725d5b8c5731f41218e97dcad3237b9",
-            "size": 197210,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-linux-riscv64.jar"
+            "sha1": "dde300b71892fddae65e4c524760e650bc924bb2",
+            "size": 119447,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-riscv64.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-linux-riscv64:3.3.6-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-riscv64:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3548,7 +3584,6 @@
     "_comment": "Add linux-riscv64 support for LWJGL 3.4.1",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.4.1",
-      "org.lwjgl:lwjgl-glfw:3.4.1",
       "org.lwjgl:lwjgl-jemalloc:3.4.1",
       "org.lwjgl:lwjgl-openal:3.4.1",
       "org.lwjgl:lwjgl-opengl:3.4.1",
@@ -3558,6 +3593,7 @@
       "org.lwjgl:lwjgl-shaderc:3.4.1",
       "org.lwjgl:lwjgl-spvc:3.4.1",
       "org.lwjgl:lwjgl-vma:3.4.1",
+      "org.lwjgl:lwjgl-sdl:3.4.1",
       "org.lwjgl:lwjgl:3.4.1:unsafe"
     ],
     "additionalLibraries": [
@@ -3570,24 +3606,6 @@
           }
         },
         "name": "org.lwjgl:lwjgl-freetype-natives-linux-riscv64:3.4.1-lwjgl.1",
-        "rules": [
-          {
-            "action": "allow",
-            "os": {
-              "name": "linux-riscv64"
-            }
-          }
-        ]
-      },
-      {
-        "downloads": {
-          "artifact": {
-            "sha1": "d76ed6846bff9804cfd1adb84b068728645a097b",
-            "size": 120912,
-            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-riscv64.jar"
-          }
-        },
-        "name": "org.lwjgl:lwjgl-glfw-natives-linux-riscv64:3.4.1-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3758,6 +3776,42 @@
             }
           }
         ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "d443cd6e73467f437d0be30a3ece7b6fe162a10a",
+            "size": 1207531,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-sdl/lwjgl-sdl-natives-linux-riscv64.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-sdl-natives-linux-riscv64:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "linux-riscv64"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "d76ed6846bff9804cfd1adb84b068728645a097b",
+            "size": 120912,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-linux-riscv64.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux-riscv64:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "linux-riscv64"
+            }
+          }
+        ]
       }
     ]
   },
@@ -3765,8 +3819,8 @@
     "_comment": "Add freebsd support for LWJGL 3.3.6",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.3.6",
-      "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-jemalloc:3.3.6",
+      "org.lwjgl:lwjgl-glfw:3.3.6",
       "org.lwjgl:lwjgl-opengl:3.3.6",
       "org.lwjgl:lwjgl-stb:3.3.6",
       "org.lwjgl:lwjgl-tinyfd:3.3.6",
@@ -3794,12 +3848,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "9f667a3390e801ca45eaa62579eee475b9ad5c6e",
-            "size": 104962,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-freebsd.jar"
+            "sha1": "55e44d237cd730ab3d910339d0142c9f4b57c5ff",
+            "size": 152529,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-freebsd.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-glfw-natives-freebsd:3.3.6-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-jemalloc-natives-freebsd:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3812,12 +3866,12 @@
       {
         "downloads": {
           "artifact": {
-            "sha1": "55e44d237cd730ab3d910339d0142c9f4b57c5ff",
-            "size": 152529,
-            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-jemalloc/lwjgl-jemalloc-natives-freebsd.jar"
+            "sha1": "9f667a3390e801ca45eaa62579eee475b9ad5c6e",
+            "size": 104962,
+            "url": "https://build.lwjgl.org/release/3.3.6/bin/lwjgl-glfw/lwjgl-glfw-natives-freebsd.jar"
           }
         },
-        "name": "org.lwjgl:lwjgl-jemalloc-natives-freebsd:3.3.6-lwjgl.1",
+        "name": "org.lwjgl:lwjgl-glfw-natives-freebsd:3.3.6-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -3905,7 +3959,6 @@
     "_comment": "Add freebsd support for LWJGL 3.4.1",
     "match": [
       "org.lwjgl:lwjgl-freetype:3.4.1",
-      "org.lwjgl:lwjgl-glfw:3.4.1",
       "org.lwjgl:lwjgl-jemalloc:3.4.1",
       "org.lwjgl:lwjgl-opengl:3.4.1",
       "org.lwjgl:lwjgl-stb:3.4.1",
@@ -3914,6 +3967,7 @@
       "org.lwjgl:lwjgl-shaderc:3.4.1",
       "org.lwjgl:lwjgl-spvc:3.4.1",
       "org.lwjgl:lwjgl-vma:3.4.1",
+      "org.lwjgl:lwjgl-sdl:3.4.1",
       "org.lwjgl:lwjgl:3.4.1:unsafe"
     ],
     "additionalLibraries": [
@@ -3926,24 +3980,6 @@
           }
         },
         "name": "org.lwjgl:lwjgl-freetype-natives-freebsd:3.4.1-lwjgl.1",
-        "rules": [
-          {
-            "action": "allow",
-            "os": {
-              "name": "freebsd"
-            }
-          }
-        ]
-      },
-      {
-        "downloads": {
-          "artifact": {
-            "sha1": "c367840595bdaa6f84830138c8b5cf59618b60fa",
-            "size": 106220,
-            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-freebsd.jar"
-          }
-        },
-        "name": "org.lwjgl:lwjgl-glfw-natives-freebsd:3.4.1-lwjgl.1",
         "rules": [
           {
             "action": "allow",
@@ -4096,7 +4132,171 @@
             }
           }
         ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "1616d4bd1f5ae03faa9c815c728f74d186526eee",
+            "size": 1241210,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-sdl/lwjgl-sdl-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-sdl-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "c367840595bdaa6f84830138c8b5cf59618b60fa",
+            "size": 106220,
+            "url": "https://build.lwjgl.org/release/3.4.1/bin/lwjgl-glfw/lwjgl-glfw-natives-freebsd.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-freebsd:3.4.1-lwjgl.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "freebsd"
+            }
+          }
+        ]
       }
     ]
+  },
+  {
+    "_comment": "Add glfw to LWJGL 3.4.1",
+    "match": [
+      "org.lwjgl:lwjgl:3.4.1",
+      "org.lwjgl:lwjgl:3.4.1:unsafe"
+    ],
+    "additionalLibraries": [
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "a782b1ddd175c9107bf300fd92920579ea65e2a4",
+            "size": 151893,
+            "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-glfw/3.4.1/lwjgl-glfw-3.4.1.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw:3.4.1"
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "23cdf7655ce9f3b27ad90f08e73345e0d5b46362",
+            "size": 139793,
+            "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-glfw/3.4.1/lwjgl-glfw-3.4.1-natives-linux.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-linux:3.4.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "linux"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "3c8538942f58377d59cd7be2dc164ba71a53868a",
+            "size": 153018,
+            "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-glfw/3.4.1/lwjgl-glfw-3.4.1-natives-macos.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-macos:3.4.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "osx"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "ef1f8efca5a60ba3512bc4982b88e446ecc43378",
+            "size": 147477,
+            "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-glfw/3.4.1/lwjgl-glfw-3.4.1-natives-macos-arm64.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-macos-arm64:3.4.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "osx-arm64"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "2eb4aa895ea190ba8cf4356f8cea24d3ebb40ea1",
+            "size": 173265,
+            "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-glfw/3.4.1/lwjgl-glfw-3.4.1-natives-windows.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-windows:3.4.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "windows"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "a48bbdd544f00c88f8906e9d09e3f31bc1c17fac",
+            "size": 166065,
+            "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-glfw/3.4.1/lwjgl-glfw-3.4.1-natives-windows-x86.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-windows-x86:3.4.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "windows"
+            }
+          }
+        ]
+      },
+      {
+        "downloads": {
+          "artifact": {
+            "sha1": "196101d96d9b2aa73264a96ae1dc8944a1446cee",
+            "size": 153879,
+            "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-glfw/3.4.1/lwjgl-glfw-3.4.1-natives-windows-arm64.jar"
+          }
+        },
+        "name": "org.lwjgl:lwjgl-glfw-natives-windows-arm64:3.4.1",
+        "rules": [
+          {
+            "action": "allow",
+            "os": {
+              "name": "windows-arm64"
+            }
+          }
+        ]
+      }
+    ],
+    "patchAdditionalLibraries": true
   }
 ]

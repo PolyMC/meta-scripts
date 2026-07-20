@@ -17,7 +17,12 @@ libs() {
 	platform="$1"
 	version="$2"
 
-	_match="lwjgl-glfw lwjgl-jemalloc"
+	_match="lwjgl-jemalloc"
+
+	# glfw is no longer used on 3.4.1 (sorta)
+	if ! version_gte "$version" "3.4.1"; then
+		_match="$_match lwjgl-glfw"
+	fi
 
 	if [ "$platform" != freebsd ]; then
 		_match="$_match lwjgl-openal"
@@ -37,6 +42,8 @@ libs() {
 		if [ "$platform" = "macos-arm64" ]; then
 			_match="$_match lwjgl-vulkan"
 		fi
+
+		_match="$_match lwjgl-sdl"
 	fi
 
 	echo "$_match"
