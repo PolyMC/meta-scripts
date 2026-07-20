@@ -1,4 +1,4 @@
-import json
+from meta.common.json import dump, dumps, load, loads
 import os
 
 import requests
@@ -28,7 +28,7 @@ def main():
     # make sure we understand the schema
     remote_versions = LiteloaderIndex.parse_obj(main_json)
     parsed = remote_versions.json()
-    original = json.dumps(main_json, sort_keys=True, indent=4)
+    original = dumps(main_json, sort_keys=True, indent=4)
     assert parsed == original
 
     print("Successfully parsed index")

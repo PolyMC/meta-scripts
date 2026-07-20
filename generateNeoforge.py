@@ -1,4 +1,4 @@
-import json
+from meta.common.json import dump, dumps, load, loads
 import os
 import sys
 
@@ -81,7 +81,7 @@ def version_from_installer(installer: MojangVersion, profile: NeoForgeInstallerP
 def main():
     # load the locally cached version list
     with open(os.path.join(UPSTREAM_DIR, DERIVED_INDEX_FILE), 'r') as f:
-        entries = [NeoForgeEntry.from_obj(e) for e in json.load(f)]
+        entries = [NeoForgeEntry.from_obj(e) for e in load(f)]
 
     recommended_versions = []
 

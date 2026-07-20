@@ -1,4 +1,4 @@
-import json
+from meta.common.json import dump, dumps, load, loads
 import os
 
 from meta.common import ensure_component_dir, polymc_path, upstream_path, transform_maven_key
@@ -62,7 +62,7 @@ def main():
     recommended_intermediary_versions = []
 
     with open(os.path.join(UPSTREAM_DIR, META_DIR, "loader.json"), 'r', encoding='utf-8') as f:
-        loader_version_index = json.load(f)
+        loader_version_index = load(f)
         for entry in loader_version_index:
             version = entry["version"]
             print(f"Processing loader {version}")
@@ -75,7 +75,7 @@ def main():
             v.write(os.path.join(PMC_DIR, LOADER_COMPONENT, f"{v.version}.json"))
 
     with open(os.path.join(UPSTREAM_DIR, META_DIR, "intermediary.json"), 'r', encoding='utf-8') as f:
-        intermediary_version_index = json.load(f)
+        intermediary_version_index = load(f)
         for entry in intermediary_version_index:
             version = entry["version"]
             print(f"Processing intermediary {version}")
