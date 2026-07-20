@@ -13,7 +13,14 @@ libraries() {
 	platform="$1"
 	version="$2"
 
-	for lib in $(libs "$platform" "$version"); do
+	_libs=$(libs "$platform" "$version")
+
+	# additional override for glfw
+	if [ "$version" = "3.4.1" ]; then
+		_libs="$_libs lwjgl-glfw"
+	fi
+
+	for lib in $_libs; do
 		# TODO(crueter): make into common funcs?
 		# lwjgl jemalloc for 3.3.1 needs to be patched for 16kb page size (asahi)
 		# only affects linux-arm64
