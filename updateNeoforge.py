@@ -3,7 +3,7 @@
 """
 import hashlib
 import itertools
-import json
+from meta.common.json import dump, dumps, load, loads
 import os
 import sys
 import zipfile
@@ -52,7 +52,7 @@ def main():
     if os.path.isfile(INDEX_PATH):
         with open(INDEX_PATH, 'r', encoding='utf-8') as f:
             try:
-                existing_data = {e['version']: e for e in json.load(f)}
+                existing_data = {e['version']: e for e in load(f)}
             except Exception:
                 eprint("Failed to load existing index, starting fresh.")
 
@@ -152,7 +152,7 @@ def main():
 
     print("\nDumping index files...")
     with open(INDEX_PATH, 'w', encoding='utf-8') as f:
-        json.dump([e.dict() for e in entries], f, sort_keys=True, indent=4)
+        dump([e.dict() for e in entries], f, sort_keys=True, indent=4)
 
 if __name__ == '__main__':
     main()

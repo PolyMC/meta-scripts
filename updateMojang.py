@@ -1,4 +1,4 @@
-import json
+from meta.common.json import dump, dumps, load, loads
 import os
 import zipfile
 
@@ -29,13 +29,13 @@ def fetch_zipped_version(path, url):
         for info in z.infolist():
             if info.filename.endswith(".json"):
                 print(f"Found {info.filename} as version json")
-                version_json = json.load(z.open(info))
+                version_json = load(z.open(info))
                 break
 
     assert version_json
 
     with open(path, 'w', encoding='utf-8') as f:
-        json.dump(version_json, f, sort_keys=True, indent=4)
+        dump(version_json, f, sort_keys=True, indent=4)
 
     return version_json
 
@@ -46,7 +46,7 @@ def fetch_version(path, url):
     version_json = r.json()
 
     with open(path, 'w', encoding='utf-8') as f:
-        json.dump(version_json, f, sort_keys=True, indent=4)
+        dump(version_json, f, sort_keys=True, indent=4)
 
     return version_json
 

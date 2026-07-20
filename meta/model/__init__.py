@@ -6,6 +6,7 @@ import pydantic
 from pydantic import Field, validator
 
 from ..common import serialize_datetime, replace_old_launchermeta_url, get_all_bases, merge_dict
+from ..common.json import dumps, loads
 
 META_FORMAT_VERSION = 1
 
@@ -161,6 +162,9 @@ class MetaBase(pydantic.BaseModel):
             datetime: serialize_datetime,
             GradleSpecifier: str
         }
+
+        json_dumps = dumps
+        json_loads = loads
 
 
 class Versioned(MetaBase):

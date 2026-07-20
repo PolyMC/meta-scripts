@@ -3,7 +3,7 @@
 """
 import copy
 import hashlib
-import json
+from meta.common.json import dump, dumps, load, loads
 import os
 import re
 import sys
@@ -60,7 +60,7 @@ def get_single_forge_files_manifest(longversion):
     from_file = False
     if files_manifest_file.is_file():
         with open(path_thing, 'r') as f:
-            files_json = json.load(f)
+            files_json = load(f)
             from_file = True
     else:
         file_url = 'https://files.minecraftforge.net/net/minecraftforge/forge/%s/meta.json' % longversion
@@ -113,7 +113,7 @@ def get_single_forge_files_manifest(longversion):
 
     if not from_file:
         with open(path_thing, 'w', encoding='utf-8') as f:
-            json.dump(files_json, f, sort_keys=True, indent=4)
+            dump(files_json, f, sort_keys=True, indent=4)
 
     return ret_dict
 
@@ -223,10 +223,10 @@ def main():
     print("Dumping index files...")
 
     with open(UPSTREAM_DIR + "/forge/maven-metadata.json", 'w', encoding='utf-8') as f:
-        json.dump(main_json, f, sort_keys=True, indent=4)
+        dump(main_json, f, sort_keys=True, indent=4)
 
     with open(UPSTREAM_DIR + "/forge/promotions_slim.json", 'w', encoding='utf-8') as f:
-        json.dump(promotions_json, f, sort_keys=True, indent=4)
+        dump(promotions_json, f, sort_keys=True, indent=4)
 
     new_index.write(UPSTREAM_DIR + "/forge/derived_index.json")
 

@@ -1,4 +1,4 @@
-import json
+from meta.common.json import dump, dumps, load, loads
 import os
 import zipfile
 from datetime import datetime
@@ -41,7 +41,7 @@ def get_json_file(path, url):
         r = sess.get(url)
         r.raise_for_status()
         version_json = r.json()
-        json.dump(version_json, f, sort_keys=True, indent=4)
+        dump(version_json, f, sort_keys=True, indent=4)
         return version_json
 
 
@@ -96,7 +96,7 @@ def main():
 
     # for each loader, download installer JSON file from maven
     with open(os.path.join(UPSTREAM_DIR, META_DIR, "loader.json"), 'r', encoding='utf-8') as loaderVersionIndexFile:
-        loader_version_index = json.load(loaderVersionIndexFile)
+        loader_version_index = load(loaderVersionIndexFile)
         for it in loader_version_index:
             print(f"Downloading JAR info for loader {it['version']} ")
             maven_url = get_maven_url(it["maven"], "https://maven.fabricmc.net/", ".json")
