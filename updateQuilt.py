@@ -62,7 +62,7 @@ def get_binary_file(path, url, sess):
     with open(path, 'wb') as f:
         r = sess.get(url)
         r.raise_for_status()
-        for chunk in r.iter_content(chunk_size=128):
+        for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
 
 

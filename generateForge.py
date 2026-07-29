@@ -134,7 +134,13 @@ def version_from_modernized_installer(installer: MojangVersion, version: ForgeVe
 
     mc_filter = load_mc_version_filter(mc_version)
     for upstream_lib in installer.libraries:
-        forge_lib = Library.parse_obj(upstream_lib.dict())  # "cast" MojangLibrary to Library
+        forge_lib = Library(
+            extract=upstream_lib.extract,
+            name=upstream_lib.name,
+            downloads=upstream_lib.downloads,
+            natives=upstream_lib.natives,
+            rules=upstream_lib.rules,
+        )  # "cast" MojangLibrary to Library
         if forge_lib.name.is_lwjgl() or forge_lib.name.is_log4j() or should_ignore_artifact(mc_filter, forge_lib.name):
             continue
 
@@ -204,7 +210,13 @@ def version_from_build_system_installer(installer: MojangVersion, profile: Forge
     v.maven_files.append(installer_lib)
 
     for upstream_lib in profile.libraries:
-        forge_lib = Library.parse_obj(upstream_lib.dict())
+        forge_lib = Library(
+            extract=upstream_lib.extract,
+            name=upstream_lib.name,
+            downloads=upstream_lib.downloads,
+            natives=upstream_lib.natives,
+            rules=upstream_lib.rules,
+        )
         if forge_lib.name.is_log4j():
             continue
 
@@ -223,7 +235,13 @@ def version_from_build_system_installer(installer: MojangVersion, profile: Forge
     v.libraries.append(wrapper_lib)
 
     for upstream_lib in installer.libraries:
-        forge_lib = Library.parse_obj(upstream_lib.dict())
+        forge_lib = Library(
+            extract=upstream_lib.extract,
+            name=upstream_lib.name,
+            downloads=upstream_lib.downloads,
+            natives=upstream_lib.natives,
+            rules=upstream_lib.rules,
+        )
         if forge_lib.name.is_log4j():
             continue
 
@@ -368,13 +386,12 @@ def main():
 
         v.write(os.path.join(PMC_DIR, FORGE_COMPONENT, f"{v.version}.json"))
 
-        recommended_versions.sort()
+    recommended_versions.sort()
+    print('Recommended versions:', recommended_versions)
 
-        print('Recommended versions:', recommended_versions)
-
-        package = MetaPackage(uid=FORGE_COMPONENT, name="Forge", project_url="https://www.minecraftforge.net/forum/")
-        package.recommended = recommended_versions
-        package.write(os.path.join(PMC_DIR, FORGE_COMPONENT, "package.json"))
+    package = MetaPackage(uid=FORGE_COMPONENT, name="Forge", project_url="https://www.minecraftforge.net/forum/")
+    package.recommended = recommended_versions
+    package.write(os.path.join(PMC_DIR, FORGE_COMPONENT, "package.json"))
 
 
 if __name__ == '__main__':

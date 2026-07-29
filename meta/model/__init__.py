@@ -11,6 +11,24 @@ from ..common.json import dumps, loads
 META_FORMAT_VERSION = 1
 
 
+# dict-friendly type conversion but without pydantic nonsense
+def _fast_convert(value):
+    tp = type(value)
+    if tp is list:
+        return [_fast_convert(v) for v in value]
+    if tp is dict:
+        return {k: _fast_convert(v) for k, v in value.items()}
+    if tp is str or tp is int or tp is float or tp is bool or value is None:
+        return value
+    if tp is GradleSpecifier:
+        return str(value)
+    if tp is datetime:
+        return serialize_datetime(value)
+    if isinstance(value, MetaBase):
+        return value.fast_to_dict()
+    return value
+
+
 class GradleSpecifier:
     """
         A gradle specifier - a maven coordinate. Like one of these:
@@ -117,9 +135,23 @@ class MetaBase(pydantic.BaseModel):
 
         return super(MetaBase, self).json(exclude_none=True, sort_keys=True, by_alias=True, indent=4, **kwargs)
 
+    # faster dict conversion without pydantic nonsense
+    # this primarily is done to avoid recursion
+    def fast_to_dict(self) -> Dict[str, Any]:
+        if "__root__" in self.__fields__:
+            return _fast_convert(self.__root__)
+        result = {}
+        for field_name, field_obj in self.__fields__.items():
+            alias = field_obj.alias or field_name
+            value = getattr(self, field_name)
+            if value is None:
+                continue
+            result[alias] = _fast_convert(value)
+        return result
+
     def write(self, file_path):
         with open(file_path, "w") as f:
-            f.write(self.json())
+            f.write(dumps(self.fast_to_dict(), indent=4, sort_keys=True))
 
     def merge(self, other):
         """
