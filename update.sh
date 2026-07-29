@@ -45,6 +45,7 @@ python updateMojang.py || fail_in
 python updateForge.py || fail_in
 python updateNeoforge.py || fail_in
 python updateFabric.py || fail_in
+python updateLegacyFabric.py || fail_in
 python updateQuilt.py || fail_in
 python updateLiteloader.py || fail_in
 
@@ -68,6 +69,7 @@ python generateMojang.py || fail_out
 python generateForge.py || fail_out
 python generateNeoforge.py || fail_out
 python generateFabric.py || fail_out
+python generateLegacyFabric.py || fail_out
 python generateQuilt.py || fail_out
 python generateLiteloader.py || fail_out
 python index.py || fail_out
