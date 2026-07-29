@@ -5,7 +5,7 @@
 # shellcheck disable=SC1091
 . ./common.sh
 
-versions="3.3.1 3.3.2 3.3.3 3.3.6 3.4.1"
+versions="3.3.1 3.3.2 3.3.3 3.3.6 3.4.1 3.4.2"
 platforms="linux-arm64 linux-arm32 linux-riscv64 freebsd"
 
 # TODO(crueter): See if these need to be made separate.

@@ -5,8 +5,8 @@
 # shellcheck disable=SC1091
 . ./common.sh
 
-range="3.3.1-3.4.1"
-versions="3.3.1 3.3.2 3.3.3 3.3.6 3.4.1"
+range="3.3.1-3.4.2"
+versions="3.3.1 3.3.2 3.3.3 3.3.6 3.4.1 3.4.2"
 platforms="windows-arm64 osx-arm64"
 
 match_block() {
