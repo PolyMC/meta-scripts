@@ -28,7 +28,15 @@ libs() {
 		_match="$_match lwjgl-openal"
 	fi
 
-	_match="$_match lwjgl-opengl lwjgl-stb lwjgl-tinyfd lwjgl"
+	_match="$_match lwjgl-opengl lwjgl-stb"
+	# 3.4.3 removed tinyfd, and added spng
+	if version_gte "$version" "3.4.3"; then
+		_match="$_match lwjgl-spng"
+	else
+		_match="$_match lwjgl-tinyfd"
+	fi
+
+	_match="$_match lwjgl"
 
 	# freetype
 	if version_gte "$version" "3.3.2"; then

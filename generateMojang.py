@@ -64,6 +64,7 @@ LOG4J_HASHES = {
 # We want versions that contain natives for all platforms. If there are multiple, pick the latest one
 # LWJGL versions we want
 PASS_VARIANTS = [
+    "40ee0dc8739c4539b51df3a92386941bd1d9d911",  # 3.4.3 (2026-09-01 11:29:01+00:00)
     "fd17e8d3473d57ff4141a36cbfcfabade5fbb7c5",  # 3.4.2 (2026-07-21 11:45:42+00:00)
     "317adbdf3b02845f7240549bb4aaa5fcd1344c49",  # 3.4.1, but with SDL
     "2b00f31688148fc95dbc8c8ef37308942cf0dce0",  # 3.3.6
@@ -83,6 +84,7 @@ PASS_VARIANTS = [
 
 # LWJGL versions we def. don't want!
 BAD_VARIANTS = [
+    "b510ab8669cd8b031298f171aa810c7d3e7acb8f",  # 3.4.3 (2026-08-25 12:53:43+00:00)
     "17754e4d1045947c3b99d22b9db7e75bfb6d252a",  # 3.4.2 (2026-08-17 11:46:16+00:00), doesn't launch
     "0ab5c885c21dfd8133277e8f557839f5fab35311",  # 3.4.1, but without SDL
     "472ee33f7a1294822aa2d617cd6ccdfd92f949a0",  # 3.4.1, marked as bad by Mojang
