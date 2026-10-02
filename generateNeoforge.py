@@ -130,6 +130,7 @@ def main():
         if not os.path.isfile(profile_filepath):
             eprint(f"Skipping {entry.sane_version()} with missing profile json")
             continue
+
         eprint(f"Processing NeoForge {entry.sane_version()}")
         profile = NeoForgeInstallerProfile.parse_file(profile_filepath)
         installer = MojangVersion.parse_file(installer_version_filepath)

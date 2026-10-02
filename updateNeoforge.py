@@ -107,11 +107,19 @@ def main():
                     continue
 
             eprint(f"Downloading {entry.installer_url()}")
-            installer_file = sess.get(entry.installer_url(), stream=True)
-            installer_file.raise_for_status()
-            with open(jar_path, 'wb') as f:
-                for chunk in installer_file.iter_content(chunk_size=8192):
-                    f.write(chunk)
+            try:
+                installer_file = sess.get(entry.installer_url(), stream=True)
+                installer_file.raise_for_status()
+                with open(jar_path, 'wb') as f:
+                    for chunk in installer_file.iter_content(chunk_size=8192):
+                        f.write(chunk)
+            except requests.exceptions.HTTPError as e:
+                eprint(f"Skipping {entry.version}: Failed to download installer: {e}")
+                with suppress(OSError):
+                    if os.path.isfile(jar_path) and os.path.getsize(jar_path) == 0:
+                        os.remove(jar_path)
+                entries.remove(entry)
+                continue
 
         if not os.path.isfile(jar_path):
             eprint(f"Skipping {entry.version}: Jar not found")
@@ -128,27 +136,41 @@ def main():
 
         # check hash
         if entry.mc_version != "1.20.1":
-            hashfile = sess.get(entry.installer_url() + ".sha1")
-            hashfile.raise_for_status()
-            if hashfile.text.strip() != computed_hash:
-                eprint(f"Invalid hash for {entry.sane_version()}")
+            try:
+                hashfile = sess.get(entry.installer_url() + ".sha1")
+                hashfile.raise_for_status()
+                if hashfile.text.strip() != computed_hash:
+                    eprint(f"Invalid hash for {entry.sane_version()}, skipping")
+                    entries.remove(entry)
+                    continue
+            except requests.exceptions.HTTPError as e:
+                eprint(f"Skipping {entry.sane_version()}: no installer hash found ({e})")
+                entries.remove(entry)
+                with suppress(OSError):
+                    if os.path.isfile(jar_path):
+                        os.remove(jar_path)
                 continue
 
         entry.installer_sha1 = computed_hash
 
         # Extract profiles if missing
         if not os.path.isfile(profile_path):
-            with zipfile.ZipFile(jar_path) as jar:
-                with suppress(KeyError):
-                    with jar.open('version.json') as profile_zip_entry:
-                        version_data = profile_zip_entry.read()
-                        with open(version_path, 'wb') as version_json:
-                            version_json.write(version_data)
+            try:
+                with zipfile.ZipFile(jar_path) as jar:
+                    with suppress(KeyError):
+                        with jar.open('version.json') as profile_zip_entry:
+                            version_data = profile_zip_entry.read()
+                            with open(version_path, 'wb') as version_json:
+                                version_json.write(version_data)
 
-                with jar.open('install_profile.json') as profile_zip_entry:
-                    install_profile_data = profile_zip_entry.read()
-                    with open(profile_path, 'wb') as profile_json:
-                        profile_json.write(install_profile_data)
+                    with jar.open('install_profile.json') as profile_zip_entry:
+                        install_profile_data = profile_zip_entry.read()
+                        with open(profile_path, 'wb') as profile_json:
+                            profile_json.write(install_profile_data)
+            except KeyError as e:
+                eprint(f"Skipping {entry.sane_version()}: no installer manifest found ({e})")
+                entries.remove(entry)
+                continue
 
     print("\nDumping index files...")
     with open(INDEX_PATH, 'w', encoding='utf-8') as f:
