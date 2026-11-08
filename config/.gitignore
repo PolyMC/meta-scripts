@@ -1,2 +1,4 @@
-*.key
-*.pub
+*
+!.gitignore
+!readme.txt
+!meta.env.example

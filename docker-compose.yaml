@@ -1,13 +1,16 @@
-version: "3"
-
 services:
   meta:
-    build: .
-    command: cron
-    volumes:
-      - "./caches:/app/caches"
-      - "./upstream:/app/upstream"
-      - "./polymc:/app/polymc"
-      - "./public:/app/public"
-      - "./config:/app/config"
+    build:
+      context: .
+      args:
+        UID: ${UID:-1337}
+        GID: ${GID:-1337}
     restart: unless-stopped
+    env_file: config/meta.env
+    environment:
+      INTERVAL: 3600
+    volumes:
+      - ./upstream:/app/upstream
+      - ./polymc:/app/polymc
+      - ./public:/app/public
+      - ./config:/app/config:ro

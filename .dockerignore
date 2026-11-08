@@ -1,11 +1,5 @@
-.git/
-.idea/
-
-caches/
-.idea/
-__pycache__/
-public/
-
-polymc/
-upstream/
-config/
+*
+!meta
+!static
+!requirements.txt
+**/__pycache__

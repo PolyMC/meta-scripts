@@ -1,5 +1,1 @@
-pydantic==1.10.4
-cachecontrol[filecache]
-packaging
-setuptools
-ujson
+httpx==0.28.1

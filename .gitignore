@@ -1,11 +1,5 @@
-.idea/
-
+__pycache__/
+venv/
+upstream/
+polymc/
 public/*/
-
-caches/
-!caches/*/.keep
-__pycache__
-config_local.sh
-polymc
-upstream
-venv

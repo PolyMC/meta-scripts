@@ -1,8 +1,2 @@
-This is where you should put the git deploy keys.
-
-These are expected:
-* meta-multimc.key
-* meta-multimc.key.pub
-* meta-upstream.key
-* meta-upstream.key.pub
-* s3cmd.cfg
+Copy meta.env.example to meta.env and edit it.
+Put the SSH key with push access to meta-upstream and meta-polymc at deploy.key.

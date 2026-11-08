@@ -1,27 +1,22 @@
-FROM python:3.12.4-bullseye
+FROM python:3.15-slim
+
 ARG UID=1337
 ARG GID=1337
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
 
-RUN groupadd -g $GID user \
-    && useradd -m -g $GID -u $UID user \
-    && mkdir -p /home/user/.ssh \
-    && ssh-keyscan github.com > /home/user/.ssh/known_hosts \
-    && mkdir -p /app \
-    && chown -R $UID:$GID /app /home/user/.ssh
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git openssh-client \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd -g "$GID" meta \
+    && useradd -m -u "$UID" -g "$GID" meta
 
-COPY . /app/
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY meta meta
+COPY static static
 
-RUN pip install -r /app/requirements.txt \
-    && apt-get update && apt-get install -y rsync cron openssh-client
+USER meta
+RUN mkdir -p /home/meta/.ssh && ssh-keyscan github.com > /home/meta/.ssh/known_hosts
 
-# add our cronjob
-COPY docker/update.cron /etc/cron.d/meta-update
-RUN chmod 644 /etc/cron.d/meta-update \
-    && crontab /etc/cron.d/meta-update
-
-# install entrypoint
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint
-RUN chmod +x /usr/local/bin/entrypoint
-
-ENTRYPOINT ["/usr/local/bin/entrypoint"]
-CMD ["update"]
+ENTRYPOINT ["python", "-m", "meta"]
