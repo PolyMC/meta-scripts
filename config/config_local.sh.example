@@ -6,3 +6,8 @@ export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 export DEPLOY_TO_FOLDER=false
 export DEPLOY_TO_GIT=true
 export GIT_SSH_COMMAND="ssh -i ${BASEDIR}/config/deploy.key"
+# Public URL of the deployed v1 folder. Required for the lwjgl3ify profiles,
+# which download a small helper jar from ${META_BASE_URL}/maven/.
+#export META_BASE_URL="https://meta.example.org/v1"
+# Optional: raises the GitHub API rate limit for updateMulti3ify.py.
+#export GITHUB_TOKEN=""

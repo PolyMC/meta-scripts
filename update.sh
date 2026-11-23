@@ -47,6 +47,7 @@ python updateNeoforge.py || fail_in
 python updateFabric.py || fail_in
 python updateQuilt.py || fail_in
 python updateLiteloader.py || fail_in
+python updateMulti3ify.py || fail_in
 
 if [ "${DEPLOY_TO_GIT}" = true ] ; then
     upstream_git add mojang/version_manifest_v2.json mojang/versions/* mojang/assets/* || fail_in
@@ -55,6 +56,7 @@ if [ "${DEPLOY_TO_GIT}" = true ] ; then
     upstream_git add fabric/loader-installer-json/*.json fabric/meta-v2/*.json fabric/jars/*.json || fail_in
     upstream_git add quilt/loader-installer-json/*.json quilt/meta-v3/*.json quilt/jars/*.json || fail_in
     upstream_git add liteloader/*.json || fail_in
+    upstream_git add multi3ify/lwjgl3ify/*.json multi3ify/cleanroom/*.json || fail_in
     if ! upstream_git diff --cached --exit-code ; then
         upstream_git commit -a -m "Update ${currentDate}" || fail_in
         upstream_git push || exit 1
@@ -70,6 +72,7 @@ python generateNeoforge.py || fail_out
 python generateFabric.py || fail_out
 python generateQuilt.py || fail_out
 python generateLiteloader.py || fail_out
+python generateMulti3ify.py || fail_out
 python index.py || fail_out
 
 if [ "${DEPLOY_TO_GIT}" = true ] ; then
@@ -79,6 +82,12 @@ if [ "${DEPLOY_TO_GIT}" = true ] ; then
     polymc_git add net.fabricmc.fabric-loader/* net.fabricmc.intermediary/* || fail_out
     polymc_git add org.quiltmc.quilt-loader/* || fail_out  # TODO: add Quilt hashed, once it is actually used
     polymc_git add com.mumfrey.liteloader/* || fail_out
+    # lwjgl3ify and its helper jar are skipped without META_BASE_URL
+    for dir in io.github.jackofnonetrades.lwjgl3ify io.github.jackofnonetrades.cleanroom maven; do
+        if [ -d "${BASEDIR}/${PMC_DIR}/${dir}" ]; then
+            polymc_git add "${dir}" || fail_out
+        fi
+    done
 
     if ! polymc_git diff --cached --exit-code ; then
         polymc_git commit -a -m "Update ${currentDate}" || fail_out

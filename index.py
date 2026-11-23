@@ -19,7 +19,7 @@ def hash_file(hash_fn, file_name):
 
 
 # ignore these files when indexing versions
-ignore = {"index.json", "package.json", ".git", ".github"}
+ignore = {"index.json", "package.json", ".git", ".github", "maven"}
 
 # initialize output structures - package list level
 packages = MetaPackageIndex()
@@ -46,9 +46,12 @@ for package in sorted(os.listdir(PMC_DIR)):
         filepath = PMC_DIR + "/%s/%s" % (package, filename)
         filehash = hash_file(hashlib.sha256, filepath)
         versionFile = MetaVersion.parse_file(filepath)
-        is_recommended = versionFile.version in recommendedVersions
+        is_recommended = filename.removesuffix(".json") in recommendedVersions
 
         versionEntry = MetaVersionIndexEntry.from_meta_version(versionFile, is_recommended, filehash)
+        # Aliases (e.g. net.minecraft/1.7.10-lwjgl3ify.json) are looked up by file
+        # name but keep the vanilla version in their payload.
+        versionEntry.version = filename.removesuffix(".json")
 
         versionList.versions.append(versionEntry)
 
